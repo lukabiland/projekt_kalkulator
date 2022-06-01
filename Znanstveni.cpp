@@ -5,12 +5,19 @@
 #include "Header.h"
 
 void znanstveni(void) {
-	int izbornik;
-	float a, b, rezultat,pi=3.14,rad;
+	int izbornik,n;
+	float a, b, rezultat,pi=3.14,rad,a1,q;
+
+	
+
+
+	
+	
+
 	printf("Odaberite operaciju:\n");
 	printf("1 Zbrajanje\n2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Apsolutna_vrijednost\n6 Mod\n7 Faktorijel\n8 1/x\n9 Na_kvadrat\n");
 	printf("10 x^y\n11 Korijen\n12 Logaritam_po_bazi_10\n13 Prirodni logaritam\n14 Sinus\n15 Kosinus\n16 Tangens\n17 Kotangens\n");
-	printf("18 Asin\n19 Acos\n20 Atan\n21 Actg\n22 Izlaz\n");
+	printf("18 Asin\n19 Acos\n20 Atan\n21 Actg\n22 Aritmeticki niz\n23 Geometrijski niz\n24 Izlaz\n");
 	scanf("%d", &izbornik);
 	switch (izbornik) {
 	case 1:
@@ -235,7 +242,29 @@ void znanstveni(void) {
 		break;
 
 	case 22:
-		return;
+		printf("Unesite broj clanova aritmetickog niza:\n");
+		scanf("%d", &n);
+		printf("Unesite prvi clan aritmetickog niza:\n");
+		scanf("%f", &a1);
+		printf("Unesite diferenciju d aritmetickog niza:\n");
+		scanf("%f", &d);
+		aniz(a1, n, d);
+		znanstveni();
+		break;
+
+	case 23:
+		printf("Unesite broj clanova geometrijskog niza:\n");
+		scanf("%d", &n);
+		printf("Unesite prvi clan geometrijskog niza:\n");
+		scanf("%f", &a1);
+		printf("Unesite kvocjent q geometrijskog niza:\n");
+		scanf("%f", &q);
+		gniz(a1, n, q);
+		znanstveni();
+			break;
+
+	case 24:
+		return ;
 		break;
 	}
 }

@@ -5,16 +5,29 @@
 #include<string.h>
 #include "Header.h"
 
-void programerski(void) {
-	int izbornik,rez,pos = 1, dec,bin=0,okt=0,hex=0,decc=0,i=0,rem,len;
-	long long binn,hexi[17];
+int programerski(void) {
+	int a, b, c, izbornik, rez, pos = 1, dec, bin = 0, okt = 0, hex = 0, decc = 0, i = 0, rem, len;
+	long long binn, hexi[17];
 	//long int binar,j=1,remi,hexa=0;
-	float a, b, rezultat, pi = 3.14, rad;
+	float rezultat, pi = 3.14, rad;
 	printf("Odaberite operaciju:\n");
 	printf("1 Zbrajanje\n2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Dek u bin\n6 Dek u okt\n7 Dek u hex\n8 Bin u dek\n9 Bin u okt\n");
 	printf("10 Bin u hex\n11 Hex u dek\n12 Hex u bin\n13 Hex u okt\n14 Okt u dek\n15 Okt u bin\n16 Okt u hex\n");
-	printf("17 Sklop I\n");
+	printf("17 Sklop I\n18 Sklop ILI\n19 Sklop NE\n20 Sklop NI\n21 Sklop NILI\n22 Sklop iskljucivo ILI\n23 IEEE 754 jednostruka preciznost\n");
+	printf("24 IEEE 754 dvostruka preciznost\n25 Izlaz\n");
 	scanf("%d", &izbornik);
+	float real_broj;
+	char* ie1 = NULL;
+	ie1 = (char*)calloc(32, sizeof(char)); //rezerviramo polje za 32 podatka tipa char u koje æemo smjestiti
+	if (ie1 == NULL) {						//rezultat
+		return -1;
+	}
+
+	char* ie2 = NULL;
+	ie2 = (char*)calloc(64, sizeof(char)); //rezerviramo polje za 64 podatka tipa char u koje æemo smjestiti
+	if (ie2 == NULL) {						//rezultat
+		return -1;
+	}
 	switch (izbornik) {
 	case 1:
 
@@ -57,7 +70,7 @@ void programerski(void) {
 		printf("Unesite broj:");
 		scanf("%d", &dec);
 
-
+		printf("\n");
 		/*do {
 			bin = bin+(dec%2)*pos;
 			dec = dec / 2;
@@ -66,7 +79,7 @@ void programerski(void) {
 
 		bin = dec_to_bin(dec);
 
-		printf("Dek u bin:%d\n", bin);
+		printf("Dek u bin:%d\n\n", bin);
 		programerski();
 		break;
 
@@ -85,7 +98,7 @@ void programerski(void) {
 
 		okt = dec_to_oct(dec);
 
-		printf("Dek u okt:%d\n", okt);
+		printf("Dek u okt:%d\n\n", okt);
 		programerski();
 		break;
 
@@ -275,7 +288,7 @@ void programerski(void) {
 
 	case 14:
 		int n, k, od;
-		int z,znam;
+		int z, znam;
 		do {
 			printf("Unesite oktalni broj:");
 			scanf("%d", &n);
@@ -286,9 +299,9 @@ void programerski(void) {
 				if (znam > 7) {
 					z = 0;
 				}
-				
-			} while (z>0);
-		} while (znam>7);
+
+			} while (z > 0);
+		} while (znam > 7);
 		od = oct_to_dec(n);
 		printf("Dekadska vrijednost broja %d iznosi %d\n", n, od);
 		programerski();
@@ -338,16 +351,165 @@ void programerski(void) {
 		programerski();
 		break;
 
-	/*case 17:
-		
+	case 17:
+
+		printf("Unesite prvi broj - dekadski:");
+		scanf("%d", &a);
+
+
+
+
+		printf("Unesite drugi broj dekadski:");
+		scanf("%d", &b);
+
+
+		c = a & b;
+
+		printf("Vrijednost:%d\n\n", c);
+
 		programerski();
-		break;*/
+		break;
+
+	case 18:
+
+		printf("Unesite prvi broj:");
+		scanf("%d", &a);
+
+
+
+
+		printf("Unesite drugi broj:");
+		scanf("%d", &b);
+
+
+		c = a | b;
+
+		printf("Vrijednost:%d\n\n", c);
+
+		programerski();
+		break;
+
+	case 19:
+
+		printf("Unesite dekadski broj:");
+		scanf("%d", &a);
+
+		c = ~a;
+
+		printf("Vrijednost:%d\n\n", c);
+
+		programerski();
+		break;
+
+	case 20:
+
+		printf("Unesite prvi broj - dekadski:");
+		scanf("%d", &a);
+
+
+
+
+		printf("Unesite drugi broj - dekadski:");
+		scanf("%d", &b);
+
+
+		c = ~(a & b);
+
+		printf("Vrijednost:%d\n\n", c);
+
+		programerski();
+		break;
+
+	case 21:
+
+		printf("Unesite prvi broj - dekadski:");
+		scanf("%d", &a);
+
+
+
+
+		printf("Unesite drugi broj dekadski:");
+		scanf("%d", &b);
+
+
+		c = ~(a | b);
+
+		printf("Vrijednost:%d\n\n", c);
+
+		programerski();
+		break;
+
+	case 22:
+
+		printf("Unesite prvi broj:");
+		scanf("%d", &a);
+
+
+		printf("Unesite drugi broj:");
+		scanf("%d", &b);
+
+
+		c = a ^ b;
+
+		printf("Vrijednost:%d\n\n", c);
+
+		programerski();
+		break;
+
+		/*case 23:
+
+				printf("Unesite prvi broj:");
+				scanf("%d", &a);
+
+
+				printf("Unesite drugi broj:");
+				scanf("%d", &b);
+
+			c =~(a ^ b);
+
+			printf("Vrijednost:%d\n\n", c);
+
+			programerski();
+			break;*/
+
+	case 23:
+		printf("unesite realan broj koji zelite napisati u IEEE754 obliku s jednostrukom preciznoscu\n");
+		scanf("%f", &real_broj);
+		ieee754_jednostruko(real_broj, ie1); //pozovemo funkciju koja æe napraviti konverziju
+		printf("IEEE754 glasi: %c ", ie1[31]);//u ie1[0] je predznak broja 1 - minus 0 plus
+		for (int i = 30; i > 22; i--) { //slijedecih 8 bitova je karakteristika
+			printf("%c", *(ie1 + i));
+		}
+		printf(" ");
+		for (int i = 22; i > -1; i--) { //ostalih 23 bita je mantisa
+			printf("%c", *(ie1 + i));
+		}
+		free(ie1);
+		programerski();
+		break;
+	case 24:
+		float real_broj_d;
+
+		printf("unesite realan broj koji zelite napisati u IEEE754 obliku s dvostrukom preciznoscu\n");
+		scanf("%f", &real_broj_d);
+		ieee754_dvostruko(real_broj_d, ie2); //pozovemo funkciju koja æe napraviti konverziju
+		printf("IEEE754 glasi: %c ", ie2[63]);//u ie2[63] je predznak broja 1 - minus 0 plus
+		for (int i = 62; i > 51; i--) { //slijedecih 11 bitova je karakteristika
+			printf("%c", *(ie2 + i));
+		}
+		printf(" ");
+		for (int i = 51; i > -1; i--) { //ostalih 23 bita je mantisa
+			printf("%c", *(ie2 + i));
+		}
+		printf("\n");
+		free(ie2);
+		programerski();
+		break;
+
+	case 25:
+		return -1;
+		break;
 
 	}
-//}
-		
-	/*case 22:
-		return;
-		break;*/
-	//}
+
 }

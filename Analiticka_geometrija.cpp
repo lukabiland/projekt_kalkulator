@@ -8,9 +8,8 @@ int analiticka_geometrija(void) {
 	int fn; // u ovu varijablu æemo smjestiti broj kalkulatora 
 
 	printf("Odaberite sto zelite izracunavati!\n");
-	printf("1 Udaljenost dviju tocaka\n2 Udaljenost tocke od pravca\n3 Jednadžba pravca kroz dvije tocke\n");
-	printf("4 Jednadzba kruznice kroz 3 tocke\n");
-	printf("5 Za izlaz pritisnite\n");
+	printf("1 Udaljenost dviju tocaka\n2 Udaljenost tocke od pravca\n3 Jednadzba pravca kroz dvije tocke\n4 Kvadratna jednadzba\n");
+	printf("5 Izlaz\n");
 	scanf("%d", &fn);
 	TOCKA* pokNaTocku = NULL;
 	pokNaTocku = (TOCKA*)calloc(2, sizeof(TOCKA));
@@ -33,6 +32,7 @@ int analiticka_geometrija(void) {
 		razmak = udaljenost_dvije_tocke(pokNaTocku);
 		printf("udaljenost izmeðu tocaka je:%f\n", razmak);
 		free(pokNaTocku);
+		analiticka_geometrija();
 		break;
 	case 2:
 		float k, l, x, y, d;
@@ -46,6 +46,7 @@ int analiticka_geometrija(void) {
 		d = udaljenost_pravac_tocka(pokNaTocku, k, l);
 		printf("udaljenost tocke od pravca je:%f\n", d);
 		free(pokNaTocku);
+		analiticka_geometrija();
 		break;
 	case 3:
 
@@ -59,6 +60,30 @@ int analiticka_geometrija(void) {
 		scanf("%f", &(pokNaTocku + 1)->y);
 		jednadzba_pravca(pokNaTocku);
 		free(pokNaTocku);
+		analiticka_geometrija();
 		break;
+
+	case 4:
+		float A, B, C,x1,x2;
+		printf("unesite koeficijente kvadratne jednadzbe A, B i C\n");
+		scanf(" %f\n%f\n%f", &A, &B, &C);
+
+		if (((B * B) - (4 * A * C)) < 0) {
+			printf("diskriminante je manje od nule pa ne postoje realna rjesenja\n");
+			break;
+		}
+		 x1 = rjesenje1(A, B, C);
+		printf("prvo rjesenje kvadratne jednadzbe je: %f\n", x1);
+		 x2 = rjesenje2(A, B, C);
+		printf("drugo rjesenje kvadratne jednadzbe je: %f\n", x2);
+		analiticka_geometrija();
+		break;
+
+
+	case 5:
+		return -1;
+		break;
+
+		
 	}
 }

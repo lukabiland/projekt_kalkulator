@@ -130,7 +130,7 @@ void standardni(void) {
 		break;
 
 		case 9:
-		return;
+		return ;
 		break;
 	}
 }

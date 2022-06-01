@@ -4,6 +4,7 @@
 #include<math.h>
 #include<string.h>
 #include "Header.h"
+#define M_PI 3.14159265359
 
 float zbrajanje(float a, float b) {
 	float zbr = a + b;
@@ -256,12 +257,115 @@ float prostorna_dijagonala_kocke(float a) {
 	return prost_di;
 }
 
+float trokut(float a, float b, float c) {
+	float x;
+	if ((a + b < c || a + c < b || b + c < a)) {
+		x = 0;
+	}
+	else if (a == b && a != c) {
+		x = 2;
+	}
+	else if (a != c && a != b && c != b) {
+		x = 3;
+	}
+	else if (b == c && a != c) {
+		x = 2;
+	}
+	else if (a == c && b != c) {
+		x = 2;
+	}
+	else if (a == b && a == c) {
+		x = 1;
+	}
+	return x;
+}
+
+float opseg_trokuta(float a, float b, float c) {
+	float o, p;
+	if (a == b && a != c) {
+	o = (2*a)+b;
+	}
+	else if (a != c && a != b && c != b) {
+		o = a + b + c;
+	}
+	else if (b == c && a != c) {
+		o = (2 * a) + b;
+	}
+	else if (a == c && b != c) {
+		o = (2 * a) + b;
+	}
+	else if (a == b && a == c) {
+		o = 3 * a;
+	}
+	return o;
+}
+
+float povrsina_trokuta(float a, float b, float c,float s) {
+	float o, p;
+	//s =(1/2.)*(a + b + c);
+	if (a == b && a != c) {
+		p=sqrt(s*(s-a)*(s-b)*(s-c));
+	}
+	else if (a != c && a != b && c != b) {
+		p = sqrt(s * (s - a) * (s - b) * (s - c));
+	}
+	else if (b == c && a != c) {
+		p = sqrt(s * (s - a) * (s - b) * (s - c));
+	}
+	else if (a == c && b != c) {
+		p = sqrt(s * (s - a) * (s - b) * (s - c));
+	}
+	else if (a == b && a == c) {
+		p = sqrt(s * (s - a) * (s - b) * (s - c));
+	}
+	return p;
+}
+
 float udaljenost_dvije_tocke(TOCKA* poknatocku) {
 	float udaljenost;
 	udaljenost = sqrt(pow((((poknatocku + 1)->x) - (poknatocku->x)), 2) + pow((((poknatocku + 1)->y) - (poknatocku->y)), 2));
 	return udaljenost;
 }
 
+float obujam_stosca(float r,float h) {
+	float o, d, v;
+	v = (1/3.)*(r*r)*M_PI*h;
+	return v;
+
+}
+
+float oplosje_stosca(float r,float s) {
+	float o, d, v;
+	o = r*M_PI*(r+s);
+	return o;
+}
+
+
+float obujam_valjka(float r, float h) {
+	float o, d, v;
+	v = (r*r)*M_PI*h;
+	return v;
+
+}
+
+float oplosje_valjka(float r, float h) {
+	float o, d, v;
+	o = 2*r*M_PI*(r+h);
+	return o;
+}
+
+float obujam_kugle(float r) {
+	float o, v;
+	v = (4/3.)*(r*r*r)*M_PI;
+	return v;
+
+}
+
+float oplosje_kugle(float r) {
+	float o, v;
+	o = 4*(r*r)*M_PI;
+	return o;
+}
 
 float udaljenost_pravac_tocka(TOCKA* poknatocku, float k, float l) {
 	float udaljenost;
@@ -289,182 +393,229 @@ void jednadzba_pravca(TOCKA* poknatocku) {
 
 }
 
-
-/*void standardni(void) {
-	int izbornik;
-	float a, b, rezultat;
-	printf("Odaberite operaciju:\n");
-	printf("1 Zbrajanje\n2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Postotak\n6 kvadrat\n7 Drugi korjen\n8 1/x\n9 Izlaz\n");
-	scanf("%d", &izbornik);
-	switch (izbornik) {
-	case 1:
-
-		printf("Unesite dva broja koja zelite zbrojiti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = zbrajanje(a, b);
-		printf("%f+%f=%f\n", a, b, rezultat);
-		standardni();
-		break;
-
-	case 2:
-		printf("Unesite dva broja koja zelite oduzeti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = oduzimanje(a, b);
-		printf("%f-%f=%f\n", a, b, rezultat);
-		standardni();
-		break;
-	case 3:
-		printf("Unesite dva broja koja zelite pomnoziti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = mnozenje(a, b);
-		printf("%fx%f=%f\n", a, b, rezultat);
-		standardni();
-		break;
-	case 4:
-		printf("Unesite dva broja koja zelite podijeliti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = dijeljenje(a, b);
-		printf("%f:%f=%f\n", a, b, rezultat);
-		standardni();
-		break;
-	case 5:
-		printf("Unesite postotak i broj:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = postotak(a, b);
-		printf("%f posto od %f=%f\n", a, b, rezultat);
-		standardni();
-		break;
-	case 6:
-		printf("Unesite broj koja zelite kvadrirati:");
-		scanf("%f", &a);
-
-		rezultat = mnozenje(a, a);
-		printf("%f^2=%f\n", a, rezultat);
-		standardni();
-		break;
-	case 7:
-		printf("Unesite broj koja zelite korjenovati:");
-		scanf("%f", &a);
-
-		rezultat = drugi_korjen(a);
-		printf("Drugi korjen od %f=%f\n", a, rezultat);
-		standardni();
-		break;
-
-	case 8:
-		printf("Unesite broj ciju reciprocnu vrijednost zelite izracunati:");
-		scanf("%f", &a);
-
-		rezultat = 1 / a;
-		printf("Reciprocna vrijednost broja %f=%f\n", a, rezultat);
-		standardni();
-		break;
-
-	case 9:
-		return;
-		break;
-	}
+float rjesenje1(float A, float B, float C) {
+	float x1;
+	x1 = ((-B + sqrt(B * B - (4 * A * C))) / (2 * A));
+	return x1;
 }
 
-float apsolutni(float a) {
-	if (a < 0) {
-		a = a * (-1);
-	}
-	return a;
+float rjesenje2(float A, float B, float C) {
+	float x2;
+	x2 = ((-B - sqrt(B * B - (4 * A * C))) / (2 * A));
+	return x2;
 }
 
-float mod(int a, int b) {
-	float mo = a % b;
-	return mo;
-}*/
-/*
-int faktorijel(int n) {
-	printf("Poziv za n = %d, adresa varijable &n = %p.\n", n, &n);
-	if (n > 1) {
-		return n * faktorijel(n - 1);
+long long dec_to_bin_dv(long long dec) {
+	long long pos = 1, bin = 0;
+	do {
+		bin = bin + (dec % 2) * pos;
+		dec = dec / 2;
+		pos *= 10;
+	} while (dec > 0);
+	return bin;
+}
+
+
+char ieee754_jednostruko(float rbroj, char* ie1) {
+	char p, chk;
+	float temp;
+	int be = 0, karakteristika = 0;
+	long long k = 0;
+
+	if (rbroj < 0) { //najprije postavljamo apsolutnu vrijednost.
+		rbroj = rbroj * (-1);	//ako je broj bio negativan u varijablu p postavimo 1, ako je bio pozitivina postavimo 0
+		p = '1';
 	}
 	else {
-		return 1;
+		p = '0';
+	}
+
+	temp = rbroj;
+	if (rbroj > 2) { //ako je apsolutna vrijednost veæa od 2 imamo slijedeæi postupak
+		do
+		{
+			be++;			//broj dijelimo s dva dok rezultat ne bude manji od 2, i brojimo koliko smo puta dijelili
+			temp = temp / 2;  //to je "be"
+
+		} while (temp >= 2);
+		rbroj = rbroj / pow(2, be);//broj dijelimo s 2^be
+		k = be + 127; //karakteristika je be+127
+		karakteristika = dec_to_bin(k); //preraèunavamo karakteristiku iz dekadskog u binarni
+
+
+		rbroj = rbroj - 1; //oduzimamo 1 kako bi ostala vrijednost desno od zareza (decimale)
+		mantisa(rbroj, ie1);//izraèunavamo mantisu
+	}
+	else if ((rbroj < 1) && (rbroj > 0)) { //ako je broj manji od 1 i veæi od 0 ide malo drugaèiji postupak
+		be = 0;
+		do
+		{
+			be++;
+			rbroj = rbroj * 2;
+
+		} while (rbroj < 1); //množimo s dva dok broj ne bude veæi od 1
+		be = be * (-1); //be mora biti negativan
+		k = (be + 127); //izraèunamo karakteristiku
+		karakteristika = dec_to_bin(k);  //pretvorimo je u "binarni" broj
+		rbroj = rbroj - 1; //za izraèunavanje mantise oduzimamo 1 kako bi ostale decimale
+		mantisa(rbroj, ie1); //izraèunamo mantisu
+	}
+	else  if ((rbroj > 1) && (rbroj < 2)) { //sluèaj kada je broj veæi od 1 i manji od 2
+		be = 0;
+		k = (be + 127); //karakteristika je 127
+		karakteristika = dec_to_bin(k);
+		rbroj = rbroj - 1;
+		mantisa(rbroj, ie1);
+
+	}
+	ie1[31] = p; //u polju ie1 æe bit broj zapisan u IEEE741 obliku. ie1[31] je predznak
+	for (int i = 23; i < 31; i++) {	// bitovi od 23 do 31 su karakteristika. 
+		*(ie1 + i) = (karakteristika % 10) + 48; //jer je karakteristika u binarnom obliku (zapravo u dekadskom)
+		karakteristika = karakteristika / 10; //znamenku pretvaramo u char tako da joj dodamo 48.
+	}
+
+
+	return '0';
+}
+
+
+char ieee754_dvostruko(float rbroj, char* ie2) {
+	char p, chk;
+	float temp;
+	int be = 0;
+	long long k = 0, karakteristika = 0;
+
+	if (rbroj < 0) { //najprije postavljamo apsolutnu vrijednost.
+		rbroj = rbroj * (-1);	//ako je broj bio negativan u varijablu p postavimo 1, ako je bio pozitivina postavimo 0
+		p = '1';
+	}
+	else {
+		p = '0';
+	}
+
+	temp = rbroj;
+	if (rbroj > 2) { //ako je apsolutna vrijednost veæa od 2 imamo slijedeæi postupak
+		do
+		{
+			be++;			//broj dijelimo s dva dok rezultat ne bude manji od 2, i brojimo koliko smo puta dijelili
+			temp = temp / 2;  //to je "be"
+
+		} while (temp >= 2);
+		rbroj = rbroj / pow(2, be);//broj dijelimo s 2^be
+		k = be + 1023; //karakteristika je be+1023
+		karakteristika = dec_to_bin_dv(k); //preraèunavamo karakteristiku iz dekadskog u binarni
+
+		rbroj = rbroj - 1; //oduzimamo 1 kako bi ostala vrijednost desno od zareza (decimale)
+		mantisa_dv(rbroj, ie2);//izraèunavamo mantisu
+	}
+	else if ((rbroj < 1) && (rbroj > 0)) { //ako je broj manji od 1 i veæi od 0 ide malo drugaèiji postupak
+		be = 0;
+		do
+		{
+			be++;
+			rbroj = rbroj * 2;
+
+		} while (rbroj < 1); //množimo s dva dok broj ne bude veæi od 1
+		be = be * (-1); //be mora biti negativan
+		k = (be + 1023); //izraèunamo karakteristiku
+		karakteristika = dec_to_bin_dv(k);  //pretvorimo je u "binarni" broj
+		rbroj = rbroj - 1; //za izraèunavanje mantise oduzimamo 1 kako bi ostale decimale
+		mantisa_dv(rbroj, ie2); //izraèunamo mantisu
+	}
+	else  if ((rbroj > 1) && (rbroj < 2)) { //sluèaj kada je broj veæi od 1 i manji od 2
+		be = 0;
+		k = (be + 1023); //karakteristika je 127
+		karakteristika = dec_to_bin_dv(k);
+		rbroj = rbroj - 1;
+		mantisa_dv(rbroj, ie2);
+
+	}
+	ie2[63] = p; //u polju ie2 æe bit broj zapisan u IEEE741 obliku. ie2[63] je predznak
+	for (int i = 52; i < 63; i++) {	// bitovi od 63 do 52 su karakteristika. Pisemo ih unatrag 
+		*(ie2 + i) = (karakteristika % 10) + 48; //jer je karakteristika u binarnom obliku (zapravo u dekadskom)
+		karakteristika = karakteristika / 10; //znamenku pretvaramo u char tako da joj dodamo 48.
+	}
+
+
+	return '0';
+}
+
+
+
+void mantisa_dv(float rbroj, char* ie2) {//raèunanje mantise 
+	for (int i = 51; i > -1; i--) {
+		rbroj = rbroj * 2;
+		rbroj = ((int)(rbroj * 100 + .5) / 100.0);
+		if (rbroj >= 1) {
+			*(ie2 + i) = '1';
+			rbroj = rbroj - 1;
+		}
+		else {
+			*(ie2 + i) = '0';
+		}
+
 	}
 }
-*/
-/*void znanstveni(void) {
-	int izbornik;
-	float a, b, rezultat;
-	printf("Odaberite operaciju:\n");
-	printf("1 Zbrajanje\n2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Apsolutna_vrijednost\n6 Mod\n7 Faktorijel\n8 1/x\n9 Izlaz\n");
-	scanf("%d", &izbornik);
-	switch (izbornik) {
-	case 1:
 
-		printf("Unesite dva broja koja zelite zbrojiti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = zbrajanje(a, b);
-		printf("%f+%f=%f\n", a, b, rezultat);
-		znanstveni();
-		break;
+void mantisa(float rbroj, char* ie1) {//raèunanje mantise 
+	for (int i = 22; i >= 0; i--) {
+		rbroj = rbroj * 2;
+		if (rbroj >= 1) {
+			*(ie1 + i) = '1';
+			rbroj = rbroj - 1;
+		}
+		else {
+			*(ie1 + i) = '0';
+		}
 
-	case 2:
-		printf("Unesite dva broja koja zelite oduzeti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = oduzimanje(a, b);
-		printf("%f-%f=%f\n", a, b, rezultat);
-		znanstveni();
-		break;
-	case 3:
-		printf("Unesite dva broja koja zelite pomnoziti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = mnozenje(a, b);
-		printf("%fx%f=%f\n", a, b, rezultat);
-		znanstveni();
-		break;
-	case 4:
-		printf("Unesite dva broja koja zelite podijeliti:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = dijeljenje(a, b);
-		printf("%f:%f=%f\n", a, b, rezultat);
-		znanstveni();
-		break;
-
-	case 5:
-		printf("Unesite broj:");
-		scanf("%f", &a);
-		//scanf("%f", &b);
-		rezultat = apsolutni(a);
-		printf("%f=%f\n", a, rezultat);
-		znanstveni();
-		break;
-
-	case 6:
-		printf("Unesite broj:");
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = mod(a, b);
-		printf("%f mod %f=%f\n", a, b, rezultat);
-		znanstveni();
-		break;
-
-			case 7:
-			int n;
-			printf("Unesite broj:");
-			scanf("%d", &n);
-			int rez = faktorijel(n);
-			printf("Faktorijel broja %d je %d.\n", n, rez);
-			znanstveni();
-			break;
-
-
-	case 9:
-		return;
-		break;
 	}
-}*/
+}
+
+void aniz(float a1, int n, float d) {
+	float clan;
+	FILE* fp;
+	
+	
+	fp = fopen("aritmeticki.txt", "w");
+	if (fp == NULL) {
+		perror("kreiranje datoteke aritmeticki.txt");
+		exit(EXIT_FAILURE);
+
+	}
+	printf("1. clan=%f\n", a1);
+	fprintf(fp, "1. clan=%f\n", a1);
+	for (int i = 1; i <n; i++) {
+		clan = a1 + i  * d;
+		printf("%d. clan=%f\n", i+1, clan);
+		fprintf(fp, "%d. clan=%f\n", i + 1, clan);
+
+		
+	}
+	fclose(fp);
+}
+
+void gniz(float a1, int n, float q) {
+	float clan;
+
+	FILE* fp;
+
+	fp = fopen("geometrijski.txt", "w");
+	if (fp == NULL) {
+		perror("kreiranje datoteke geometrijski.txt");
+		exit(EXIT_FAILURE);
+
+	}
+
+	//printf("1. clan=%f\n", a1);
+	//fprintf(fp, "1. clan=%f\n", a1);
+
+	for (int i = 1; i <= n; i++) {
+		clan = a1 * pow(q, (i - 1));
+		printf("%d. clan=%f\n", i, clan);
+		fprintf(fp, "%d. clan=%f\n", i , clan);
+	}
+	fclose(fp);
+}
+
+
+

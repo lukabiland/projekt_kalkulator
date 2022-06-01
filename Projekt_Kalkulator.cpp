@@ -15,13 +15,11 @@ int main(void) {
 	printf("\n");
 	printf("3.Programerski");
 	printf("\n");
-	printf("4.Kvadratna funkcija");
+	printf("4.Geometrija");
 	printf("\n");
-	printf("5.Geometrija");
+	printf("5.Analiticka geometrija");
 	printf("\n");
-	printf("6.Analiticka geometrija");
-	printf("\n");
-	printf("7.Izlaz");
+	printf("6.Izlaz");
 	printf("\n");
 	scanf("%d", &izbornik);
 
@@ -30,40 +28,41 @@ int main(void) {
 		printf("1.Standardni\n");
 		standardni();
 		main();
-			//break;
+			break;
 
 	case 2:
 		printf("2.Znanstveni\n");
 		znanstveni();
 		main();
-		//break;
+		break;
 
 	case 3:
 		printf("3.Programerski\n");
 		programerski();
 		main();
-		//break;
+	break;
 	
 	/*case '4':
 		printf("4.Kvadratna funkcija");
 		break;*/
 
-	case 5:
-		printf("5.Geometrija\n");
+	case 4:
+		printf("4.Geometrija\n");
 		geometrija();
 		main();
 		break;
 
-case 6:
-		printf("6.Analiticka geometrija\n");
+    case 5:
+		printf("5.Analiticka geometrija\n");
 		analiticka_geometrija();
 		main();
 		break;
 
-	/*case 7:
-		printf("7.Izlaz");
-		return;
-		break;*/
+	case 6:
+		printf("6.Izlaz\n");
+		//main();
+		//return 1;
+		break;
 }
 	return 0;
 }
