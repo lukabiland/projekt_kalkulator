@@ -55,14 +55,14 @@ float drugi_korjen(float a) {
 
 void standardni(void) {
 	int izbornik;
-	float a, b, rezultat;
+	float a, b,c,d,e,f,g,h, rezultat,plus,minus,puta,kroz;
 	printf("Odaberite operaciju:\n");
 	printf("1 Zbrajanje\n");
-	printf("2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Postotak\n6 kvadrat\n7 Drugi korjen\n8 1/x\n9 Izlaz\n");
+	printf("2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Postotak\n6 kvadrat\n7 Drugi korjen\n8 1/x\n9 Sortiranje\n10 Izlaz\n");
 	scanf("%d", &izbornik);
 	switch (izbornik) {
 	case 1:
-
+		
 		printf("Unesite dva broja koja zelite zbrojiti:");
 		scanf("%f", &a);
 		scanf("%f", &b);
@@ -130,6 +130,38 @@ void standardni(void) {
 		break;
 
 		case 9:
+			printf("Unesite dva broja koja zelite zbrojiti:");
+			scanf("%f", &a);
+			scanf("%f", &b);
+
+			printf("Unesite dva broja koja zelite oduzeti:");
+			scanf("%f", &c);
+			scanf("%f", &d);
+
+			printf("Unesite dva broja koja zelite pomnoziti:");
+			scanf("%f", &e);
+			scanf("%f", &f);
+
+			printf("Unesite dva broja koja zelite podijeliti:");
+			scanf("%f", &g);
+			scanf("%f", &h);
+
+			plus = zbrajanje(a,b);
+			minus = oduzimanje(c,d);
+			puta = mnozenje(e,f);
+			kroz = dijeljenje(g,h);
+
+			printf("%f\n", plus);
+			printf("%f\n", minus);
+			printf("%f\n", puta);
+			printf("%f\n", kroz);
+
+		
+
+		standardni();
+		break;
+
+		case 10:
 		return ;
 		break;
 	}
