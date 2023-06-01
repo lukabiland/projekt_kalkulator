@@ -7,24 +7,71 @@
 #define M_PI 3.14159265359
 
 float zbrajanje(float a, float b) {
+	FILE* fp = NULL;
+	fp = fopen("zbroj.txt", "w");
+
 	float zbr = a + b;
+
+	if (fp == NULL) {
+		perror("Datoteka se ne moze kreirati.\n");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(fp, "%f+%f=%f\n", a, b, zbr);
+
+	fclose(fp);
 
 	return zbr;
 }
 float oduzimanje(float a, float b) {
+
+	FILE* fp = NULL;
+	fp = fopen("oduzimanje.txt", "w");
+
 	float od = a - b;
+
+	if (fp == NULL) {
+		perror("Datoteka se ne moze kreirati.\n");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(fp, "%f-%f=%f\n", a, b, od);
+
+	fclose(fp);
 
 	return od;
 }
 
 float mnozenje(float a, float b) {
+
+	FILE* fp = NULL;
+	fp = fopen("mnozenje.txt", "w");
+
 	float mn = a * b;
+
+	if (fp == NULL) {
+		perror("Datoteka se ne moze kreirati.\n");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(fp, "%f*%f=%f\n", a, b, mn);
+
+	fclose(fp);
 
 	return mn;
 }
 
 float dijeljenje(float a, float b) {
+
+	FILE* fp = NULL;
+	fp = fopen("dijeljenje.txt", "w");
+
 	float di = a / b;
+
+	if (fp == NULL) {
+		perror("Datoteka se ne moze kreirati.\n");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(fp, "%f/%f=%f\n", a, b, di);
+
+	fclose(fp);
 
 	return di;
 }
