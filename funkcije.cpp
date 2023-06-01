@@ -28,39 +28,6 @@ float dijeljenje(float a, float b) {
 
 	return di;
 }
-
-void ispis(const int polje[], const int n) {
-	for (int i = 0; i < n; i++)
-	{
-		if (i == 0) {
-			printf("polje[%d ", polje[i]);
-		}
-		else if (i > 0 && i < n - 1) {
-			printf("%d ", polje[i]);
-		}
-		else {
-			printf("%d]\n", polje[i]);
-		}
-	}
-}
-void zamjena(int* const veci, int* const manji) {
-	int temp = 0;
-	temp = *manji;
-	*manji = *veci;
-	*veci = temp;
-}
-void bubbleSort(int polje[], const int n) {
-	for (int i = 0; i < n - 1; i++)
-	{
-		for (int j = 0; j < n - 1 - i; j++)
-		{
-			if (polje[j + 1] < polje[j]) {
-				zamjena(&polje[j + 1], &polje[j]);
-			}
-		}
-	}
-
-
 float postotak(float a, float b) {
 	float posto = a * 0.01 * b;
 
@@ -99,7 +66,7 @@ float x_na_y(int x, int y) {
 	return rez;
 }
 
-int dec_to_bin(long long dec) { //Dekadski u binarni
+int dec_to_bin(long long dec) {
 	int pos=1,bin=0;
 	do {
 		bin = bin + (dec % 2) * pos;
@@ -109,7 +76,7 @@ int dec_to_bin(long long dec) { //Dekadski u binarni
 	return bin;
 }
 
-int dec_to_oct(long long dec) { //Dekadski u oktalni
+int dec_to_oct(long long dec) {
 	int pos = 1, oct = 0;
 	do {
 		oct = oct + (dec % 8) * pos;
@@ -119,17 +86,30 @@ int dec_to_oct(long long dec) { //Dekadski u oktalni
 	return oct;
 }
 
-int dec_to_hex(long long dec) { //Dekadski u heksadekadski
-	int pos = 1, hex = 0;
-	do {
-		hex = hex + (dec % 16) * pos;
+void dec_to_hex(long long dec) {
+	char arr[100];
+	int pos = 1, hex = 0,i=0;
+	while (dec!=0) {
+		int temp = 0;
+		temp = dec % 16;
+		if (temp < 10) {
+			arr[i] = temp + 48;
+			i++;
+		}
+		else {
+			arr[i] = temp + 55;
+			i++;
+		}
+		//hex = hex + (dec % 16) * pos;
 		dec = dec / 16;
-		pos *= 10;
-	} while (dec > 0);
-	return hex;
+		//pos *= 10;
+	}
+	for (int j = i - 1; j >= 0; j--) {
+		printf("%c", arr[j]);
+	}
 }
 
-int bin_to_dec(long long binn) { //Binarni u dekadski
+int bin_to_dec(long long binn) {
 	int i = 0, decc = 0,rem;
 	do {
 		rem = binn % 10;
@@ -140,7 +120,7 @@ int bin_to_dec(long long binn) { //Binarni u dekadski
 	return decc;
 }
 
-int bin_to_oct(long long binn) { //Binarni u oktalni
+int bin_to_oct(long long binn) {
 	int i = 0, decc = 0, okt=0;
 	
 	do {
@@ -157,7 +137,7 @@ int bin_to_oct(long long binn) { //Binarni u oktalni
 	return okt;
 }
 
-int bin_to_hex(long long binn) { //Binarni u heksadekadski
+int bin_to_hex(long long binn) {
 	int i = 1, rem, hex = 0;
 
 	do {
@@ -181,7 +161,7 @@ int hex_znam(char znam) {
 	}
 	else return -1;
 }
-long long hex_to_dec(char* hexbroj, int duzina) { //Heksadekadski u dekadski
+long long hex_to_dec(char* hexbroj, int duzina) {
 	int  znamenka;
 	long long dekadski = 0;
 	for (int i = 0; i < duzina; i++) {
@@ -195,7 +175,7 @@ long long hex_to_dec(char* hexbroj, int duzina) { //Heksadekadski u dekadski
 	return dekadski;
 }
 
-int oct_to_dec(int n) {  //Oktalni u dekadski
+int oct_to_dec(int n) {
 	int p = 0, dec = 0,r;
 
 	do {
@@ -604,7 +584,7 @@ void mantisa(float rbroj, char* ie1) {//raèunanje mantise
 	}
 }
 
-void aniz(float a1, int n, float d) {  //Aritmeticki niz
+void aniz(float a1, int n, float d) {
 	float clan;
 	FILE* fp;
 	
@@ -627,7 +607,7 @@ void aniz(float a1, int n, float d) {  //Aritmeticki niz
 	fclose(fp);
 }
 
-void gniz(float a1, int n, float q) {  //Geometrijski niz
+void gniz(float a1, int n, float q) {
 	float clan;
 
 	FILE* fp;

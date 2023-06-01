@@ -115,9 +115,9 @@ int programerski(void) {
 			pos *= 10;
 		} while (dec > 0);*/
 
-		hex = dec_to_hex(dec);
-
-		printf("Dek u hex:%d\n", hex);
+		dec_to_hex(dec);
+		printf("\n");
+		//printf("Dek u hex:%d\n", hex);
 		programerski();
 		break;
 
@@ -346,7 +346,7 @@ int programerski(void) {
 			} while (z > 0);
 		} while (znam > 7);
 		od = oct_to_dec(n);
-		hex = dec_to_hex(od);
+		dec_to_hex(od);
 		printf("Heksadekadska vrijednost broja %d iznosi %1X\n", n, hex);
 		programerski();
 		break;

@@ -6,7 +6,7 @@
 int analiticka_geometrija(void) {
 
 	int fn; // u ovu varijablu æemo smjestiti broj kalkulatora 
-
+	
 	printf("Odaberite sto zelite izracunavati!\n");
 	printf("1 Udaljenost dviju tocaka\n2 Udaljenost tocke od pravca\n3 Jednadzba pravca kroz dvije tocke\n4 Kvadratna jednadzba\n");
 	printf("5 Izlaz\n");

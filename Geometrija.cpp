@@ -27,9 +27,6 @@ void geometrija(void) {
 		printf("Opseg kvadrata je:%f\n", opseg_kv);
 		printf("Povrsina kvadrata je:%f\n", povrsina_kv);
 		printf("Dijagonala kvadrata je:%f\n", dijagonala_kv);
-
-		printf("");
-
 		geometrija();
 		break;
 
