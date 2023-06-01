@@ -18,13 +18,13 @@ int programerski(void) {
 	scanf("%d", &izbornik);
 	float real_broj;
 	char* ie1 = NULL;
-	ie1 = (char*)calloc(32, sizeof(char)); //rezerviramo polje za 32 podatka tipa char u koje æemo smjestiti
+	ie1 = (char*)calloc(32, sizeof(char)); //rezerviramo polje za 32 podatka tipa char u koje cemo smjestiti
 	if (ie1 == NULL) {						//rezultat
 		return -1;
 	}
 
 	char* ie2 = NULL;
-	ie2 = (char*)calloc(64, sizeof(char)); //rezerviramo polje za 64 podatka tipa char u koje æemo smjestiti
+	ie2 = (char*)calloc(64, sizeof(char)); //rezerviramo polje za 64 podatka tipa char u koje cemo smjestiti
 	if (ie2 == NULL) {						//rezultat
 		return -1;
 	}
@@ -116,7 +116,9 @@ int programerski(void) {
 		} while (dec > 0);*/
 
 		dec_to_hex(dec);
+
 		printf("\n");
+
 		//printf("Dek u hex:%d\n", hex);
 		programerski();
 		break;
@@ -346,8 +348,11 @@ int programerski(void) {
 			} while (z > 0);
 		} while (znam > 7);
 		od = oct_to_dec(n);
+		
+		//printf("Heksadekadska vrijednost broja %d iznosi\n", n);
 		dec_to_hex(od);
-		printf("Heksadekadska vrijednost broja %d iznosi %1X\n", n, hex);
+		printf("\n");
+
 		programerski();
 		break;
 
@@ -475,7 +480,7 @@ int programerski(void) {
 	case 23:
 		printf("unesite realan broj koji zelite napisati u IEEE754 obliku s jednostrukom preciznoscu\n");
 		scanf("%f", &real_broj);
-		ieee754_jednostruko(real_broj, ie1); //pozovemo funkciju koja æe napraviti konverziju
+		ieee754_jednostruko(real_broj, ie1); //pozovemo funkciju koja ce napraviti konverziju
 		printf("IEEE754 glasi: %c ", ie1[31]);//u ie1[0] je predznak broja 1 - minus 0 plus
 		for (int i = 30; i > 22; i--) { //slijedecih 8 bitova je karakteristika
 			printf("%c", *(ie1 + i));
@@ -484,6 +489,7 @@ int programerski(void) {
 		for (int i = 22; i > -1; i--) { //ostalih 23 bita je mantisa
 			printf("%c", *(ie1 + i));
 		}
+		printf("\n");
 		free(ie1);
 		programerski();
 		break;
@@ -492,7 +498,7 @@ int programerski(void) {
 
 		printf("unesite realan broj koji zelite napisati u IEEE754 obliku s dvostrukom preciznoscu\n");
 		scanf("%f", &real_broj_d);
-		ieee754_dvostruko(real_broj_d, ie2); //pozovemo funkciju koja æe napraviti konverziju
+		ieee754_dvostruko(real_broj_d, ie2); //pozovemo funkciju koja ce napraviti konverziju
 		printf("IEEE754 glasi: %c ", ie2[63]);//u ie2[63] je predznak broja 1 - minus 0 plus
 		for (int i = 62; i > 51; i--) { //slijedecih 11 bitova je karakteristika
 			printf("%c", *(ie2 + i));

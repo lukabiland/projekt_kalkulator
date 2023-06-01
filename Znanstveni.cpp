@@ -7,11 +7,6 @@
 void znanstveni(void) {
 	int izbornik,n;
 	float a, b, rezultat,pi=3.14,rad,a1,q;
-
-	
-
-
-	
 	
 
 	printf("Odaberite operaciju:\n");
@@ -153,7 +148,7 @@ void znanstveni(void) {
 		scanf("%f", &a);
 
 		rad = a * (pi / 180);
-
+		
 		rezultat = cos(rad);
 		printf("Kosinus od kuta %f je %f\n", a, rezultat);
 		znanstveni();

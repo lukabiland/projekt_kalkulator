@@ -29,7 +29,6 @@ float x_na_y(int x, int y);
 int programerski(void);
 int dec_to_bin(long long dec);
 int dec_to_oct(long long dec);
-//int dec_to_hex(long long dec);
 void dec_to_hex(long long dec);
 int bin_to_dec(long long binn);
 int bin_to_oct(long long binn);
@@ -72,5 +71,6 @@ char ieee754_jednostruko(float rbroj, char*);
 void mantisa(float rbroj, char* ie1);
 void aniz(float a1, int n, float d);
 void gniz(float a1, int n, float q);
+//void ispis_cetiri(const int polje[], const int n);
 
 #endif // !1

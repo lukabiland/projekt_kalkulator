@@ -8,7 +8,7 @@
 
 float zbrajanje(float a, float b) {
 	FILE* fp = NULL;
-	fp = fopen("zbroj.txt", "w");
+	fp = fopen("zbroj.txt","w");
 
 	float zbr = a + b;
 
@@ -16,14 +16,16 @@ float zbrajanje(float a, float b) {
 		perror("Datoteka se ne moze kreirati.\n");
 		exit(EXIT_FAILURE);
 	}
-	fprintf(fp, "%f+%f=%f\n", a, b, zbr);
+	fprintf(fp,"%f+%f=%f\n",a,b,zbr);
 
 	fclose(fp);
+
+	//float zbr = a + b;
 
 	return zbr;
 }
 float oduzimanje(float a, float b) {
-
+	
 	FILE* fp = NULL;
 	fp = fopen("oduzimanje.txt", "w");
 
@@ -41,7 +43,6 @@ float oduzimanje(float a, float b) {
 }
 
 float mnozenje(float a, float b) {
-
 	FILE* fp = NULL;
 	fp = fopen("mnozenje.txt", "w");
 
@@ -59,7 +60,6 @@ float mnozenje(float a, float b) {
 }
 
 float dijeljenje(float a, float b) {
-
 	FILE* fp = NULL;
 	fp = fopen("dijeljenje.txt", "w");
 
@@ -75,6 +75,42 @@ float dijeljenje(float a, float b) {
 
 	return di;
 }
+
+
+
+/*void ispis_cetiri(const int polje[], const int n) {
+	for (int i = 0; i < n; i++)
+	{
+		if (i == 0) {
+			printf("polje[%d ", polje[i]);
+		}
+		else if (i > 0 && i < n - 1) {
+			printf("%d ", polje[i]);
+		}
+		else {
+			printf("%d]\n", polje[i]);
+		}
+	}
+}
+
+/*void zamjena(int* const veci, int* const manji) {
+	int temp = 0;
+	temp = *manji;
+	*manji = *veci;
+	*veci = temp;
+}
+void bubbleSort(int polje[], const int n) {
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - 1 - i; j++)
+		{
+			if (polje[j + 1] < polje[j]) {
+				zamjena(&polje[j + 1], &polje[j]);
+			}
+		}
+	}*/
+
+
 float postotak(float a, float b) {
 	float posto = a * 0.01 * b;
 
@@ -113,7 +149,7 @@ float x_na_y(int x, int y) {
 	return rez;
 }
 
-int dec_to_bin(long long dec) {
+int dec_to_bin(long long dec) { //Dekadski u binarni
 	int pos=1,bin=0;
 	do {
 		bin = bin + (dec % 2) * pos;
@@ -123,7 +159,7 @@ int dec_to_bin(long long dec) {
 	return bin;
 }
 
-int dec_to_oct(long long dec) {
+int dec_to_oct(long long dec) { //Dekadski u oktalni
 	int pos = 1, oct = 0;
 	do {
 		oct = oct + (dec % 8) * pos;
@@ -135,8 +171,8 @@ int dec_to_oct(long long dec) {
 
 void dec_to_hex(long long dec) {
 	char arr[100];
-	int pos = 1, hex = 0,i=0;
-	while (dec!=0) {
+	int pos = 1, hex = 0, i = 0;
+	while (dec != 0) {
 		int temp = 0;
 		temp = dec % 16;
 		if (temp < 10) {
@@ -156,7 +192,7 @@ void dec_to_hex(long long dec) {
 	}
 }
 
-int bin_to_dec(long long binn) {
+int bin_to_dec(long long binn) { //Binarni u dekadski
 	int i = 0, decc = 0,rem;
 	do {
 		rem = binn % 10;
@@ -167,7 +203,7 @@ int bin_to_dec(long long binn) {
 	return decc;
 }
 
-int bin_to_oct(long long binn) {
+int bin_to_oct(long long binn) { //Binarni u oktalni
 	int i = 0, decc = 0, okt=0;
 	
 	do {
@@ -184,7 +220,7 @@ int bin_to_oct(long long binn) {
 	return okt;
 }
 
-int bin_to_hex(long long binn) {
+int bin_to_hex(long long binn) { //Binarni u heksadekadski
 	int i = 1, rem, hex = 0;
 
 	do {
@@ -208,7 +244,7 @@ int hex_znam(char znam) {
 	}
 	else return -1;
 }
-long long hex_to_dec(char* hexbroj, int duzina) {
+long long hex_to_dec(char* hexbroj, int duzina) { //Heksadekadski u dekadski
 	int  znamenka;
 	long long dekadski = 0;
 	for (int i = 0; i < duzina; i++) {
@@ -222,7 +258,7 @@ long long hex_to_dec(char* hexbroj, int duzina) {
 	return dekadski;
 }
 
-int oct_to_dec(int n) {
+int oct_to_dec(int n) {  //Oktalni u dekadski
 	int p = 0, dec = 0,r;
 
 	do {
@@ -431,7 +467,7 @@ float udaljenost_pravac_tocka(TOCKA* poknatocku, float k, float l) {
 	float udaljenost;
 	//jednadzba za udaljenost pravca od ravnine glasi: d=|kx0+l-y0|/sqrt(k*k+1)
 	float brojnik, nazivnik;
-	brojnik = k * poknatocku->x + l + poknatocku->y;
+	brojnik = k * poknatocku->x + l - poknatocku->y;
 	if (brojnik < 0) brojnik = brojnik * (-1);
 	nazivnik = sqrt(k * k + 1);
 	udaljenost = brojnik / nazivnik;
@@ -441,7 +477,7 @@ float udaljenost_pravac_tocka(TOCKA* poknatocku, float k, float l) {
 
 void jednadzba_pravca(TOCKA* poknatocku) {
 	//jednadzba pravca kroz dvije tocke glasi: y-y1=((y2-y1)/(x2-x1))*(x-x1)
-	//izraz (y2-y1)/(x2-x1) cemo izraèunati i oznaèiti kao z, pa imamo z=(y2-y1)/(x2-x1)
+	//izraz (y2-y1)/(x2-x1) cemo izracunati i oznaciti kao z, pa imamo z=(y2-y1)/(x2-x1)
 	//odnosno y-y1=z*(x-x1), dalje y=z*x-z*x1+y1 odnosno l=z*x1+y1 i na kraju imamo izraz y=kx+l 
 	float z, l, k;
 
@@ -491,7 +527,7 @@ char ieee754_jednostruko(float rbroj, char* ie1) {
 	}
 
 	temp = rbroj;
-	if (rbroj > 2) { //ako je apsolutna vrijednost veæa od 2 imamo slijedeæi postupak
+	if (rbroj > 2) { //ako je apsolutna vrijednost veca od 2 imamo slijedeci postupak
 		do
 		{
 			be++;			//broj dijelimo s dva dok rezultat ne bude manji od 2, i brojimo koliko smo puta dijelili
@@ -500,27 +536,27 @@ char ieee754_jednostruko(float rbroj, char* ie1) {
 		} while (temp >= 2);
 		rbroj = rbroj / pow(2, be);//broj dijelimo s 2^be
 		k = be + 127; //karakteristika je be+127
-		karakteristika = dec_to_bin(k); //preraèunavamo karakteristiku iz dekadskog u binarni
+		karakteristika = dec_to_bin(k); //preracunavamo karakteristiku iz dekadskog u binarni
 
 
 		rbroj = rbroj - 1; //oduzimamo 1 kako bi ostala vrijednost desno od zareza (decimale)
-		mantisa(rbroj, ie1);//izraèunavamo mantisu
+		mantisa(rbroj, ie1);//izracunavamo mantisu
 	}
-	else if ((rbroj < 1) && (rbroj > 0)) { //ako je broj manji od 1 i veæi od 0 ide malo drugaèiji postupak
+	else if ((rbroj < 1) && (rbroj > 0)) { //ako je broj manji od 1 i veci od 0 ide malo drugaciji postupak
 		be = 0;
 		do
 		{
 			be++;
 			rbroj = rbroj * 2;
 
-		} while (rbroj < 1); //množimo s dva dok broj ne bude veæi od 1
+		} while (rbroj < 1); //mnozimo s dva dok broj ne bude veci od 1
 		be = be * (-1); //be mora biti negativan
-		k = (be + 127); //izraèunamo karakteristiku
+		k = (be + 127); //izracunamo karakteristiku
 		karakteristika = dec_to_bin(k);  //pretvorimo je u "binarni" broj
-		rbroj = rbroj - 1; //za izraèunavanje mantise oduzimamo 1 kako bi ostale decimale
-		mantisa(rbroj, ie1); //izraèunamo mantisu
+		rbroj = rbroj - 1; //za izracunavanje mantise oduzimamo 1 kako bi ostale decimale
+		mantisa(rbroj, ie1); //izracunamo mantisu
 	}
-	else  if ((rbroj > 1) && (rbroj < 2)) { //sluèaj kada je broj veæi od 1 i manji od 2
+	else  if ((rbroj > 1) && (rbroj < 2)) { //slucaj kada je broj veæi od 1 i manji od 2
 		be = 0;
 		k = (be + 127); //karakteristika je 127
 		karakteristika = dec_to_bin(k);
@@ -528,7 +564,7 @@ char ieee754_jednostruko(float rbroj, char* ie1) {
 		mantisa(rbroj, ie1);
 
 	}
-	ie1[31] = p; //u polju ie1 æe bit broj zapisan u IEEE741 obliku. ie1[31] je predznak
+	ie1[31] = p; //u polju ie1 ce biti broj zapisan u IEEE741 obliku. ie1[31] je predznak
 	for (int i = 23; i < 31; i++) {	// bitovi od 23 do 31 su karakteristika. 
 		*(ie1 + i) = (karakteristika % 10) + 48; //jer je karakteristika u binarnom obliku (zapravo u dekadskom)
 		karakteristika = karakteristika / 10; //znamenku pretvaramo u char tako da joj dodamo 48.
@@ -554,7 +590,7 @@ char ieee754_dvostruko(float rbroj, char* ie2) {
 	}
 
 	temp = rbroj;
-	if (rbroj > 2) { //ako je apsolutna vrijednost veæa od 2 imamo slijedeæi postupak
+	if (rbroj > 2) { //ako je apsolutna vrijednost veæa od 2 imamo slijedeci postupak
 		do
 		{
 			be++;			//broj dijelimo s dva dok rezultat ne bude manji od 2, i brojimo koliko smo puta dijelili
@@ -563,26 +599,26 @@ char ieee754_dvostruko(float rbroj, char* ie2) {
 		} while (temp >= 2);
 		rbroj = rbroj / pow(2, be);//broj dijelimo s 2^be
 		k = be + 1023; //karakteristika je be+1023
-		karakteristika = dec_to_bin_dv(k); //preraèunavamo karakteristiku iz dekadskog u binarni
+		karakteristika = dec_to_bin_dv(k); //preracunavamo karakteristiku iz dekadskog u binarni
 
 		rbroj = rbroj - 1; //oduzimamo 1 kako bi ostala vrijednost desno od zareza (decimale)
-		mantisa_dv(rbroj, ie2);//izraèunavamo mantisu
+		mantisa_dv(rbroj, ie2);//izracunavamo mantisu
 	}
-	else if ((rbroj < 1) && (rbroj > 0)) { //ako je broj manji od 1 i veæi od 0 ide malo drugaèiji postupak
+	else if ((rbroj < 1) && (rbroj > 0)) { //ako je broj manji od 1 i veci od 0 ide malo drugaciji postupak
 		be = 0;
 		do
 		{
 			be++;
 			rbroj = rbroj * 2;
 
-		} while (rbroj < 1); //množimo s dva dok broj ne bude veæi od 1
+		} while (rbroj < 1); //mnozimo s dva dok broj ne bude veci od 1
 		be = be * (-1); //be mora biti negativan
-		k = (be + 1023); //izraèunamo karakteristiku
+		k = (be + 1023); //izracunamo karakteristiku
 		karakteristika = dec_to_bin_dv(k);  //pretvorimo je u "binarni" broj
-		rbroj = rbroj - 1; //za izraèunavanje mantise oduzimamo 1 kako bi ostale decimale
-		mantisa_dv(rbroj, ie2); //izraèunamo mantisu
+		rbroj = rbroj - 1; //za izracunavanje mantise oduzimamo 1 kako bi ostale decimale
+		mantisa_dv(rbroj, ie2); //izracunamo mantisu
 	}
-	else  if ((rbroj > 1) && (rbroj < 2)) { //sluèaj kada je broj veæi od 1 i manji od 2
+	else  if ((rbroj > 1) && (rbroj < 2)) { //slucaj kada je broj veci od 1 i manji od 2
 		be = 0;
 		k = (be + 1023); //karakteristika je 127
 		karakteristika = dec_to_bin_dv(k);
@@ -590,7 +626,7 @@ char ieee754_dvostruko(float rbroj, char* ie2) {
 		mantisa_dv(rbroj, ie2);
 
 	}
-	ie2[63] = p; //u polju ie2 æe bit broj zapisan u IEEE741 obliku. ie2[63] je predznak
+	ie2[63] = p; //u polju ie2 ce bit broj zapisan u IEEE741 obliku. ie2[63] je predznak
 	for (int i = 52; i < 63; i++) {	// bitovi od 63 do 52 su karakteristika. Pisemo ih unatrag 
 		*(ie2 + i) = (karakteristika % 10) + 48; //jer je karakteristika u binarnom obliku (zapravo u dekadskom)
 		karakteristika = karakteristika / 10; //znamenku pretvaramo u char tako da joj dodamo 48.
@@ -602,7 +638,7 @@ char ieee754_dvostruko(float rbroj, char* ie2) {
 
 
 
-void mantisa_dv(float rbroj, char* ie2) {//raèunanje mantise 
+void mantisa_dv(float rbroj, char* ie2) {//racunanje mantise 
 	for (int i = 51; i > -1; i--) {
 		rbroj = rbroj * 2;
 		rbroj = ((int)(rbroj * 100 + .5) / 100.0);
@@ -617,7 +653,7 @@ void mantisa_dv(float rbroj, char* ie2) {//raèunanje mantise
 	}
 }
 
-void mantisa(float rbroj, char* ie1) {//raèunanje mantise 
+void mantisa(float rbroj, char* ie1) {//racunanje mantise 
 	for (int i = 22; i >= 0; i--) {
 		rbroj = rbroj * 2;
 		if (rbroj >= 1) {
@@ -631,7 +667,7 @@ void mantisa(float rbroj, char* ie1) {//raèunanje mantise
 	}
 }
 
-void aniz(float a1, int n, float d) {
+void aniz(float a1, int n, float d) {  //Aritmeticki niz
 	float clan;
 	FILE* fp;
 	
@@ -654,7 +690,7 @@ void aniz(float a1, int n, float d) {
 	fclose(fp);
 }
 
-void gniz(float a1, int n, float q) {
+void gniz(float a1, int n, float q) {  //Geometrijski niz
 	float clan;
 
 	FILE* fp;

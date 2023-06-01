@@ -28,7 +28,7 @@ int main(void) {
 		printf("1.Standardni\n");
 		standardni();
 		main();
-			break;
+		break;
 
 	case 2:
 		printf("2.Znanstveni\n");
