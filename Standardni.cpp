@@ -14,8 +14,8 @@ void standardni(void) {
 	scanf("%d", &izbornik);
 	switch (izbornik) {
 	case 1:
-		
-		printf("Unesite dva broja koja zelite zbrojiti:");
+
+		printf("Unesite dva broja koja zelite zbrojiti:");//zbrajanje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = zbrajanje(a, b);
@@ -24,7 +24,7 @@ void standardni(void) {
 		break;
 
 	case 2:
-		printf("Unesite dva broja koja zelite oduzeti:");
+		printf("Unesite dva broja koja zelite oduzeti:");//oduzimanje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = oduzimanje(a, b);
@@ -32,7 +32,7 @@ void standardni(void) {
 		standardni();
 		break;
 	case 3:
-		printf("Unesite dva broja koja zelite pomnoziti:");
+		printf("Unesite dva broja koja zelite pomnoziti:");//množenje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = mnozenje(a, b);
@@ -40,7 +40,7 @@ void standardni(void) {
 		standardni();
 		break;
 	case 4:
-		printf("Unesite dva broja koja zelite podijeliti:");
+		printf("Unesite dva broja koja zelite podijeliti:");//dijeljenje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = dijeljenje(a, b);
@@ -56,7 +56,7 @@ void standardni(void) {
 		standardni();
 		break;
 	case 6:
-		printf("Unesite broj koja zelite kvadrirati:");
+		printf("Unesite broj koja zelite kvadrirati:");//kvadriranje
 		scanf("%f", &a);
 
 		rezultat = mnozenje(a, a); //pozivamo funkciju mnozenje i dajemo joj 2 puta isti broj, kako bi dobili kvadrat
@@ -64,7 +64,7 @@ void standardni(void) {
 		standardni();
 		break;
 	case 7:
-		printf("Unesite broj koja zelite korjenovati:");
+		printf("Unesite broj koja zelite korjenovati:");//drugi korijen
 		scanf("%f", &a);
 
 		rezultat = drugi_korjen(a);
@@ -72,8 +72,8 @@ void standardni(void) {
 		standardni();
 		break;
 
-		case 8:
-		printf("Unesite broj ciju reciprocnu vrijednost zelite izracunati:");
+	case 8:
+		printf("Unesite broj ciju reciprocnu vrijednost zelite izracunati:");//reciproèna vrijednost
 		scanf("%f", &a);
 
 		rezultat = 1 / a;
@@ -81,42 +81,9 @@ void standardni(void) {
 		standardni();
 		break;
 
-		/*case 9:
-			printf("Unesite dva broja koja zelite zbrojiti:");
-			scanf("%f", &a);
-			scanf("%f", &b);
 
-			printf("Unesite dva broja koja zelite oduzeti:");
-			scanf("%f", &c);
-			scanf("%f", &d);
-
-			printf("Unesite dva broja koja zelite pomnoziti:");
-			scanf("%f", &e);
-			scanf("%f", &f);
-
-			printf("Unesite dva broja koja zelite podijeliti:");
-			scanf("%f", &g);
-			scanf("%f", &h);
-
-			plus = zbrajanje(a,b);
-			minus = oduzimanje(c,d);
-			puta = mnozenje(e,f);
-			kroz = dijeljenje(g,h);
-
-			printf("%f\n", plus);
-			printf("%f\n", minus);
-			printf("%f\n", puta);
-			printf("%f\n", kroz);
-
-
-
-		
-
-		standardni();
-		break;*/
-
-		case 9:
-		return ;
+	case 9:	//povratak u glavni izbornik
+		return;
 		break;
 	}
 }

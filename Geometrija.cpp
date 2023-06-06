@@ -9,12 +9,12 @@ void geometrija(void) {
 	int izbornik;
 	float a, p, o, d, b, c, r, h, s, opseg_kv, povrsina_kv, dijagonala_kv, opseg_pr, povrsina_pr, dijagonala_pr;
 	float oplosje_kvadr, obujam_kvadr, dijagonala_kvadr, oplosje_koc, volumen_koc, plosna_dijagonala_koc, prostorna_dijagonala_koc;
-	float obujam_stos, oplosje_stos, obujam_valj, oplosje_valj, obujam_kugl, oplosje_kugl, tr, opseg_tr,povrsina_tr;
+	float obujam_stos, oplosje_stos, obujam_valj, oplosje_valj, obujam_kugl, oplosje_kugl, tr, opseg_tr, povrsina_tr;
 	printf("Odaberite operaciju:\n");
 	printf("1 Kvadrat\n2 Pravokutnik\n3 Kvadar\n4 Kocka\n5 Trokut\n6 Stozac\n7 Valjak\n8 Kugla\n9 Izlaz\n");
 	scanf("%d", &izbornik);
 	switch (izbornik) {
-	case 1:
+	case 1: //kvadrat
 		printf("Unesite stranicu:");
 		scanf("%f", &a);
 		/*p = a * a;
@@ -33,7 +33,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 2:
+	case 2: //pravotnik
 		printf("Unesite stranicu:");
 		scanf("%f", &a);
 		printf("Unesite stranicu:");
@@ -51,7 +51,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 3:
+	case 3: //trokut
 		printf("Unesite stranicu:");
 		scanf("%f", &a);
 		printf("Unesite stranicu:");
@@ -71,7 +71,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 4:
+	case 4: //kocka
 		printf("Unesite stranicu:");
 		scanf("%f", &a);
 		/*p = a * a;
@@ -89,7 +89,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 5:
+	case 5: //trokuti
 
 		printf("Unesi a stranicu trokuta\n");
 		scanf(" %f", &a);
@@ -113,16 +113,16 @@ void geometrija(void) {
 			printf("Trokut je jednakokracan\n");
 			printf("Opseg jednakokracnog trokuta je:%f\n", opseg_tr);
 			printf("Povrsina jednakokracnog trokuta je:%f\n", povrsina_tr);
-			}
-				if (tr == 3) {
-					printf("Trokut je raznostranican\n");
-					printf("Opseg raznostranicnog trokuta je:%f\n", opseg_tr);
-					printf("Povrsina raznostranicnog trokuta je:%f\n", povrsina_tr);
-				}
-			geometrija();
-			break;
+		}
+		if (tr == 3) {
+			printf("Trokut je raznostranican\n");
+			printf("Opseg raznostranicnog trokuta je:%f\n", opseg_tr);
+			printf("Povrsina raznostranicnog trokuta je:%f\n", povrsina_tr);
+		}
+		geometrija();
+		break;
 
-	case 6:
+	case 6: //stožac
 		printf("Unesite polumjer:");
 		scanf("%f", &r);
 		printf("Unesite visinu:");
@@ -139,7 +139,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 7:
+	case 7: //valjak
 		printf("Unesite polumjer:");
 		scanf("%f", &r);
 		printf("Unesite visinu:");
@@ -154,7 +154,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 8:
+	case 8: //kugla
 		printf("Unesite polumjer:");
 		scanf("%f", &r);
 
@@ -168,8 +168,8 @@ void geometrija(void) {
 		break;
 
 	case 9:
-		return ;
+		return;
 		break;
 
-		}
 	}
+}

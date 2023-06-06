@@ -40,11 +40,11 @@ int main(void) {
 		printf("3.Programerski\n");
 		programerski();
 		main();
-	break;
-	
-	/*case '4':
-		printf("4.Kvadratna funkcija");
-		break;*/
+		break;
+
+		/*case '4':
+			printf("4.Kvadratna funkcija");
+			break;*/
 
 	case 4:
 		printf("4.Geometrija\n");
@@ -52,7 +52,7 @@ int main(void) {
 		main();
 		break;
 
-    case 5:
+	case 5:
 		printf("5.Analiticka geometrija\n");
 		analiticka_geometrija();
 		main();
@@ -63,6 +63,6 @@ int main(void) {
 		//main();
 		//return 1;
 		break;
-}
+	}
 	return 0;
 }

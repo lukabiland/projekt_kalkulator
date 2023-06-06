@@ -5,9 +5,9 @@
 #include "Header.h"
 
 void znanstveni(void) {
-	int izbornik,n;
-	float a, b, rezultat,pi=3.14,rad,a1,q;
-	
+	int izbornik, n;
+	float a, b, rezultat, pi = 3.14, rad, a1, q;
+
 
 	printf("Odaberite operaciju:\n");
 	printf("1 Zbrajanje\n2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Apsolutna_vrijednost\n6 Mod\n7 Faktorijel\n8 1/x\n9 Na_kvadrat\n");
@@ -17,7 +17,7 @@ void znanstveni(void) {
 	switch (izbornik) {
 	case 1:
 
-		printf("Unesite dva broja koja zelite zbrojiti:");
+		printf("Unesite dva broja koja zelite zbrojiti:");//zbrajanje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = zbrajanje(a, b);
@@ -26,7 +26,7 @@ void znanstveni(void) {
 		break;
 
 	case 2:
-		printf("Unesite dva broja koja zelite oduzeti:");
+		printf("Unesite dva broja koja zelite oduzeti:");//oduzimanje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = oduzimanje(a, b);
@@ -34,7 +34,7 @@ void znanstveni(void) {
 		znanstveni();
 		break;
 	case 3:
-		printf("Unesite dva broja koja zelite pomnoziti:");
+		printf("Unesite dva broja koja zelite pomnoziti:");//množenje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = mnozenje(a, b);
@@ -42,7 +42,7 @@ void znanstveni(void) {
 		znanstveni();
 		break;
 	case 4:
-		printf("Unesite dva broja koja zelite podijeliti:");
+		printf("Unesite dva broja koja zelite podijeliti:");//dijeljenje
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = dijeljenje(a, b);
@@ -51,7 +51,7 @@ void znanstveni(void) {
 		break;
 
 	case 5:
-		printf("Unesite broj:");
+		printf("Unesite broj za koji zelite apsolutnu vrijednost:");//apsolutna vrijednost
 		scanf("%f", &a);
 		//scanf("%f", &b);
 		rezultat = apsolutni(a);
@@ -60,7 +60,7 @@ void znanstveni(void) {
 		break;
 
 	case 6:
-		printf("Unesite broj:");
+		printf("Unesite dva broja koja zelite podijeliti s ostatkom:"); //dijeljenje s ostatkom
 		scanf("%f", &a);
 		scanf("%f", &b);
 		rezultat = mod(a, b);
@@ -69,25 +69,28 @@ void znanstveni(void) {
 		break;
 
 	case 7:
-		int n,rez;
-		printf("Unesite broj:");
-		scanf("%d", &n);
+		int n, rez;
+		do {
+			printf("Unesite broj faktorijela:");  //raèunanje faktorijela
+			scanf("%d", &n);
+		} while (n <= 0 && n > 15);
+
 		rez = faktorijel(n);
 		printf("Faktorijel broja %d je %d.\n", n, rez);
 		znanstveni();
 		break;
 	case 8:
-		//int n, rez;
+		//raèunanje reciproène vrijednosti
 		float c, d;
 		printf("Unesite broj ciju reciprocnu vrijednost zelite izracunati:");
 		scanf("%f", &c);
-		d= 1/c;
+		d = 1 / c;
 		printf("Reciprocna vrijednost broja %f je %f.\n", c, d);
 		znanstveni();
 		break;
 
 	case 9:
-		printf("Unesite broj koji zelite kvadrirati:");
+		printf("Unesite broj koji zelite kvadrirati:");//raèunanje kvadrata
 		scanf("%f", &a);
 
 		rezultat = mnozenje(a, a); //pozivamo funkciju mnozenje i dajemo joj 2 puta isti broj, kako bi dobili kvadrat
@@ -96,17 +99,17 @@ void znanstveni(void) {
 		break;
 
 	case 10:
-		printf("Unesite bazu x i eksponent y:");
+		printf("Unesite bazu x i eksponent y:");//raèunanje potencija x na y
 		scanf("%f", &a);
 		scanf("%f", &b);
 
-		rezultat = x_na_y(a, b); //pozivamo funkciju mnozenje i dajemo joj 2 puta isti broj, kako bi dobili kvadrat
-		printf("%f^%f=%f\n", a, b ,rezultat);
+		rezultat = x_na_y(a, b);
+		printf("%f^%f=%f\n", a, b, rezultat);
 		znanstveni();
 		break;
 
 	case 11:
-		printf("Unesite broj koja zelite korjenovati:");
+		printf("Unesite broj koja zelite korjenovati:"); //korjenovanje
 		scanf("%f", &a);
 
 		rezultat = drugi_korjen(a);
@@ -115,25 +118,25 @@ void znanstveni(void) {
 		break;
 
 	case 12:
-		printf("Unesite broj koji zelite logaritmirati:");
+		printf("Unesite broj koji zelite logaritmirati:"); //logaritmiranje po bazi 10
 		scanf("%f", &a);
 
 		rezultat = log10(a);
-		printf("Logaritam broja %f po bazi 10 je %f\n",a, rezultat);
+		printf("Logaritam broja %f po bazi 10 je %f\n", a, rezultat);
 		znanstveni();
 		break;
 
 	case 13:
-		printf("Unesite broj koji zelite logaritmirati:");
-		scanf("%f", &a);
+		printf("Unesite broj koji zelite logaritmirati(prirodni logaritam):");
+		scanf("%f", &a);//prirodni logaritam
 
-		rezultat =log(a);
+		rezultat = log(a);
 		printf("Prirodni logaritam od broja %f je %f\n", a, rezultat);
 		znanstveni();
 		break;
 
 	case 14:
-		printf("Unesite kut u stupnjevima:");
+		printf("Unesite kut u stupnjevima:"); //raèunanje sinusa
 		scanf("%f", &a);
 
 		rad = a * (pi / 180);
@@ -144,18 +147,18 @@ void znanstveni(void) {
 		break;
 
 	case 15:
-		printf("Unesite kut u stupnjevima:");
+		printf("Unesite kut u stupnjevima:");//raèunanje cosinusa
 		scanf("%f", &a);
 
 		rad = a * (pi / 180);
-		
+
 		rezultat = cos(rad);
 		printf("Kosinus od kuta %f je %f\n", a, rezultat);
 		znanstveni();
 		break;
 
 	case 16:
-		printf("Unesite kut u stupnjevima:");
+		printf("Unesite kut u stupnjevima:"); //raèunanje tangensa
 		scanf("%f", &a);
 
 		rad = a * (pi / 180);
@@ -167,77 +170,55 @@ void znanstveni(void) {
 
 	case 17:
 		printf("Unesite kut u stupnjevima:");
-		scanf("%f", &a);
+		scanf("%f", &a); //raèunanje cotangensa (1/tangens)
 
 		rad = a * (pi / 180);
 
-		rezultat =1/(tan(rad));
+		rezultat = 1 / (tan(rad));
 		printf("Kotangens od kuta %f je %f\n", a, rezultat);
 		znanstveni();
 		break;
 
 	case 18:
-		printf("Unesite broj:");
-		scanf("%f", &a);
-		/*printf("Unesite broj:");
-		scanf("%f", &b);*/
-
-		//rad = a * (pi / 180);
+		do {
+			printf("Unesite sinus kuta (od -1 do 1:)"); //raèunanje kuta iz sinusa
+			scanf("%f", &a);
+		} while ((a < -1) || (a > 1));
 
 		rezultat = asin(a) * 180 / pi;
 
-		//rezultat = asin(a);
 		printf("Rezultat je %f\n", rezultat);
 		znanstveni();
 		break;
 
 	case 19:
-		printf("Unesite broj:");
-		scanf("%f", &a);
-		/*printf("Unesite broj:");
-		scanf("%f", &b);*/
-
-		//rad = a * (pi / 180);
-
+		do {
+			printf("Unesite cosinus kuta (od -1 do 1:)");//raèunanje kuta iz cosinusa
+			scanf("%f", &a);
+		} while ((a < -1) || (a > 1));
 		rezultat = acos(a) * 180 / pi;
-
-		//rezultat = asin(a);
 		printf("Rezultat je %f\n", rezultat);
 		znanstveni();
 		break;
 
 	case 20:
-		printf("Unesite broj:");
+		printf("Unesite tangens kuta:");//raèunanje kuta iz vrijednosti tangensa
 		scanf("%f", &a);
-		/*printf("Unesite broj:");
-		scanf("%f", &b);*/
-
-		//rad = a * (pi / 180);
-
 		rezultat = atan(a) * 180 / pi;
-
-		//rezultat = asin(a);
-		printf("Rezultat je %f\n", rezultat);
+		printf("Vrijednost kuta je: %f\n", rezultat);
 		znanstveni();
 		break;
 
 	case 21:
-		printf("Unesite broj:");
+		printf("Unesite cotangens kuta:");//raèunanje kuta iz vrijednosti cotangensa
 		scanf("%f", &a);
-		/*printf("Unesite broj:");
-		scanf("%f", &b);*/
-
-		//rad = a * (pi / 180);
-
-		rezultat = (1/atan(a)) * 180 / pi;
-
-		//rezultat = asin(a);
-		printf("Rezultat je %f\n", rezultat);
+		rezultat = (1 / atan(a)) * 180 / pi;
+		printf("vrijednost kuta je: %f\n", rezultat);
 		znanstveni();
 		break;
 
 	case 22:
-		printf("Unesite broj clanova aritmetickog niza:\n");
+		printf("Unesite broj clanova aritmetickog niza:\n"); //raèunanje èlanova aritmetièkog niza
 		scanf("%d", &n);
 		printf("Unesite prvi clan aritmetickog niza:\n");
 		scanf("%f", &a1);
@@ -248,7 +229,7 @@ void znanstveni(void) {
 		break;
 
 	case 23:
-		printf("Unesite broj clanova geometrijskog niza:\n");
+		printf("Unesite broj clanova geometrijskog niza:\n");//raèunanje èlanova geometrijskog niza
 		scanf("%d", &n);
 		printf("Unesite prvi clan geometrijskog niza:\n");
 		scanf("%f", &a1);
@@ -256,10 +237,10 @@ void znanstveni(void) {
 		scanf("%f", &q);
 		gniz(a1, n, q);
 		znanstveni();
-			break;
+		break;
 
 	case 24:
-		return ;
+		return;
 		break;
 	}
 }

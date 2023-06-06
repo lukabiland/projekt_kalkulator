@@ -8,7 +8,7 @@
 
 float zbrajanje(float a, float b) {
 	FILE* fp = NULL;
-	fp = fopen("zbroj.txt","w");
+	fp = fopen("zbroj.txt", "w");
 
 	float zbr = a + b;
 
@@ -16,7 +16,7 @@ float zbrajanje(float a, float b) {
 		perror("Datoteka se ne moze kreirati.\n");
 		exit(EXIT_FAILURE);
 	}
-	fprintf(fp,"%f+%f=%f\n",a,b,zbr);
+	fprintf(fp, "%f+%f=%f\n", a, b, zbr);
 
 	fclose(fp);
 
@@ -25,7 +25,7 @@ float zbrajanje(float a, float b) {
 	return zbr;
 }
 float oduzimanje(float a, float b) {
-	
+
 	FILE* fp = NULL;
 	fp = fopen("oduzimanje.txt", "w");
 
@@ -145,18 +145,59 @@ int faktorijel(int n) {
 }
 
 float x_na_y(int x, int y) {
-	float rez = pow(x,y);
+	float rez = pow(x, y);
 	return rez;
 }
 
 int dec_to_bin(long long dec) { //Dekadski u binarni
-	int pos=1,bin=0;
+	int pos = 1, bin = 0;
 	do {
 		bin = bin + (dec % 2) * pos;
 		dec = dec / 2;
 		pos *= 10;
 	} while (dec > 0);
 	return bin;
+}
+
+
+int* dec_to_bin_ar(int dec) { //Dekadski u binarni
+	int n = 0, i = 0;
+	int* a = new int[16];
+	if (dec < 0)
+	{
+		dec = dec * (-1);
+		for (i = 0; i < 16; i++)
+		{
+			int s1 = dec % 2;
+			if (s1 == 0) a[i] = 1;
+			else a[i] = 0;
+			dec = dec / 2;
+
+		}
+		for (i = 0; i < 16; i++)
+		{
+			if (a[i] == 1) a[i] = 0;
+			else {
+				a[i] = 1;
+				break;
+			}
+		}
+
+	}
+	else {
+		for (i = 0; i < 16; i++)
+		{
+			int s1 = dec % 2;
+			if (s1 == 0) a[i] = 0;
+			else a[i] = 1;
+			dec = dec / 2;
+
+		}
+	}
+
+
+
+	return a;
 }
 
 int dec_to_oct(long long dec) { //Dekadski u oktalni
@@ -193,19 +234,46 @@ void dec_to_hex(long long dec) {
 }
 
 int bin_to_dec(long long binn) { //Binarni u dekadski
-	int i = 0, decc = 0,rem;
+	int i = 0, decc = 0, rem;
+
+
 	do {
 		rem = binn % 10;
 		binn /= 10;
 		decc += rem * pow(2, i);
 		i++;
-	} while (binn != 0); 
+	} while (binn != 0);
 	return decc;
 }
 
+int bin_to_decimal(int* binn) { //Binarni u dekadski
+	int i = 0, decc = 0, rem;
+	if (binn[0] == 1) {
+
+		for (int i = 0; i < 16; i++) {
+			if (binn[i] == 0) binn[i] = 1;
+			else binn[i] = 0;
+		}
+		for (int i = 0; i < 16; i++) {
+			if (binn[i] == 1) binn[i] = 0;
+			else {
+				binn[i] = 1;
+				break;
+			}
+		}
+	}
+	int zbr = 0;
+	for (int i = 0; i < 16; i++) {
+		int df = pow(2, i);
+		zbr = zbr + binn[i] * df;
+	}
+	//if (binn[15] == 1) zbr = zbr * (-1);
+	return zbr;
+}
+
 int bin_to_oct(long long binn) { //Binarni u oktalni
-	int i = 0, decc = 0, okt=0;
-	
+	int i = 0, decc = 0, okt = 0;
+
 	do {
 		decc += (binn % 10) * pow(2, i);
 		i++;
@@ -259,12 +327,12 @@ long long hex_to_dec(char* hexbroj, int duzina) { //Heksadekadski u dekadski
 }
 
 int oct_to_dec(int n) {  //Oktalni u dekadski
-	int p = 0, dec = 0,r;
+	int p = 0, dec = 0, r;
 
 	do {
 		r = n % 10;
 		n = n / 10;
-		dec = dec + r * pow(8,p);
+		dec = dec + r * pow(8, p);
 		p++;
 	} while (n > 0);
 	return dec;
@@ -276,7 +344,7 @@ int oct_to_dec(int n) {  //Oktalni u dekadski
 }*/
 
 float opseg_kvadrata(float a) {
-	float p,o,d;
+	float p, o, d;
 	o = 4 * a;
 	return o;
 }
@@ -293,27 +361,27 @@ float dijagonala_kvadrata(float a) {
 	return d;
 }
 
-float opseg_pravokutnika(float a,float b) {
+float opseg_pravokutnika(float a, float b) {
 	float p, o, d;
-	o = 2*(a+b);
+	o = 2 * (a + b);
 	return o;
 }
 
-float povrsina_pravokutnika(float a,float b) {
+float povrsina_pravokutnika(float a, float b) {
 	float p, o, d;
 	p = a * b;
 	return p;
 }
 
-float dijagonala_pravokutnika(float a,float b) {
+float dijagonala_pravokutnika(float a, float b) {
 	float p, o, d;
-	d = sqrt((a*a)+(b*b));
+	d = sqrt((a * a) + (b * b));
 	return d;
 }
 
 float oplosje_kvadra(float a, float b, float c) {
-	float o,d,v;
-	o = 2*((a*b)+(b*c)+(a*c));
+	float o, d, v;
+	o = 2 * ((a * b) + (b * c) + (a * c));
 	return o;
 }
 
@@ -325,7 +393,7 @@ float obujam_kvadra(float a, float b, float c) {
 
 float dijagonala_kvadra(float a, float b, float c) {
 	float o, d, v;
-	d = sqrt((a*a)+(b*b)+(c*c));
+	d = sqrt((a * a) + (b * b) + (c * c));
 	return d;
 }
 
@@ -343,7 +411,7 @@ float obujam_kocke(float a) {
 
 float plosna_dijagonala_kocke(float a) {
 	float o, plos_di, v;
-	plos_di = a*sqrt(2);
+	plos_di = a * sqrt(2);
 	return plos_di;
 }
 
@@ -379,7 +447,7 @@ float trokut(float a, float b, float c) {
 float opseg_trokuta(float a, float b, float c) {
 	float o, p;
 	if (a == b && a != c) {
-	o = (2*a)+b;
+		o = (2 * a) + b;
 	}
 	else if (a != c && a != b && c != b) {
 		o = a + b + c;
@@ -396,11 +464,11 @@ float opseg_trokuta(float a, float b, float c) {
 	return o;
 }
 
-float povrsina_trokuta(float a, float b, float c,float s) {
+float povrsina_trokuta(float a, float b, float c, float s) {
 	float o, p;
 	//s =(1/2.)*(a + b + c);
 	if (a == b && a != c) {
-		p=sqrt(s*(s-a)*(s-b)*(s-c));
+		p = sqrt(s * (s - a) * (s - b) * (s - c));
 	}
 	else if (a != c && a != b && c != b) {
 		p = sqrt(s * (s - a) * (s - b) * (s - c));
@@ -423,43 +491,43 @@ float udaljenost_dvije_tocke(TOCKA* poknatocku) {
 	return udaljenost;
 }
 
-float obujam_stosca(float r,float h) {
+float obujam_stosca(float r, float h) {
 	float o, d, v;
-	v = (1/3.)*(r*r)*M_PI*h;
+	v = (1 / 3.) * (r * r) * M_PI * h;
 	return v;
 
 }
 
-float oplosje_stosca(float r,float s) {
+float oplosje_stosca(float r, float s) {
 	float o, d, v;
-	o = r*M_PI*(r+s);
+	o = r * M_PI * (r + s);
 	return o;
 }
 
 
 float obujam_valjka(float r, float h) {
 	float o, d, v;
-	v = (r*r)*M_PI*h;
+	v = (r * r) * M_PI * h;
 	return v;
 
 }
 
 float oplosje_valjka(float r, float h) {
 	float o, d, v;
-	o = 2*r*M_PI*(r+h);
+	o = 2 * r * M_PI * (r + h);
 	return o;
 }
 
 float obujam_kugle(float r) {
 	float o, v;
-	v = (4/3.)*(r*r*r)*M_PI;
+	v = (4 / 3.) * (r * r * r) * M_PI;
 	return v;
 
 }
 
 float oplosje_kugle(float r) {
 	float o, v;
-	o = 4*(r*r)*M_PI;
+	o = 4 * (r * r) * M_PI;
 	return o;
 }
 
@@ -670,8 +738,8 @@ void mantisa(float rbroj, char* ie1) {//racunanje mantise
 void aniz(float a1, int n, float d) {  //Aritmeticki niz
 	float clan;
 	FILE* fp;
-	
-	
+
+
 	fp = fopen("aritmeticki.txt", "w");
 	if (fp == NULL) {
 		perror("kreiranje datoteke aritmeticki.txt");
@@ -680,12 +748,12 @@ void aniz(float a1, int n, float d) {  //Aritmeticki niz
 	}
 	printf("1. clan=%f\n", a1);
 	fprintf(fp, "1. clan=%f\n", a1);
-	for (int i = 1; i <n; i++) {
-		clan = a1 + i  * d;
-		printf("%d. clan=%f\n", i+1, clan);
+	for (int i = 1; i < n; i++) {
+		clan = a1 + i * d;
+		printf("%d. clan=%f\n", i + 1, clan);
 		fprintf(fp, "%d. clan=%f\n", i + 1, clan);
 
-		
+
 	}
 	fclose(fp);
 }
@@ -708,10 +776,15 @@ void gniz(float a1, int n, float q) {  //Geometrijski niz
 	for (int i = 1; i <= n; i++) {
 		clan = a1 * pow(q, (i - 1));
 		printf("%d. clan=%f\n", i, clan);
-		fprintf(fp, "%d. clan=%f\n", i , clan);
+		fprintf(fp, "%d. clan=%f\n", i, clan);
 	}
 	fclose(fp);
 }
 
-
+void zamjena(int* veci, int* manji) {
+	int temp = 0;
+	temp = *manji;
+	*manji = *veci;
+	*veci = temp;
+}
 

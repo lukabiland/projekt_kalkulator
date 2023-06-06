@@ -18,7 +18,7 @@ int analiticka_geometrija(void) {
 		return 0;
 	}
 	switch (fn) {
-	case 1:
+	case 1: //udaljenost izmeğu dvije toèke u ravninin
 		float razmak;
 
 		printf("Unesite koordinatu x prve tocke\n");
@@ -34,7 +34,7 @@ int analiticka_geometrija(void) {
 		free(pokNaTocku);
 		analiticka_geometrija();
 		break;
-	case 2:
+	case 2:   //jednadba pravca
 		float k, l, x, y, d;
 		printf("Unesite za jednadzbu pravca k i l (od y=kx+l) ");
 		scanf("%f", &k);
@@ -48,7 +48,7 @@ int analiticka_geometrija(void) {
 		free(pokNaTocku);
 		analiticka_geometrija();
 		break;
-	case 3:
+	case 3:  //jednadba pravca kroz dvije toèke
 
 		printf("Unesite koordinatu x  tocke\n");
 		scanf("%f", &pokNaTocku->x);
@@ -64,8 +64,8 @@ int analiticka_geometrija(void) {
 		analiticka_geometrija();
 		break;
 
-	case 4:
-		float A, B, C,x1,x2;
+	case 4:  //kvadratna jednadba
+		float A, B, C, x1, x2;
 		printf("unesite koeficijente kvadratne jednadzbe A, B i C\n");
 		scanf(" %f\n%f\n%f", &A, &B, &C);
 
@@ -87,6 +87,6 @@ int analiticka_geometrija(void) {
 		return -1;
 		break;
 
-		
+
 	}
 }

@@ -9,7 +9,7 @@ typedef struct tocka {
 	float x;
 	float y;
 }TOCKA;
-
+int bin_to_decimal(int*);
 long long dec_to_bin_dv(long long dec);
 void mantisa_dv(float rbroj, char* ie2);
 char ieee754_dvostruko(float rbroj, char*);
@@ -27,6 +27,9 @@ float mod(int a, int b);
 int faktorijel(int n);
 float x_na_y(int x, int y);
 int programerski(void);
+
+int* dec_to_bin_ar(int dec);
+
 int dec_to_bin(long long dec);
 int dec_to_oct(long long dec);
 void dec_to_hex(long long dec);
@@ -36,6 +39,7 @@ int bin_to_hex(long long binn);
 long long hex_to_dec(char* hexbroj, int duzina);
 int hex_znam(char znam);
 int oct_to_dec(int n);
+void zamjena(int* veci, int* manji);
 void geometrija(void);
 float opseg_kvadrata(float a);
 float povrsina_kvadrata(float a);
@@ -64,7 +68,7 @@ int analiticka_geometrija();
 void jednadzba_pravca(TOCKA* poknatocku);
 float udaljenost_pravac_tocka(TOCKA* poknatocku, float k, float l);
 float udaljenost_dvije_tocke(TOCKA*);
-int dec_to_bin(long long dec);
+//int dec_to_bin(long long dec);
 float rjesenje1(float A, float B, float C);
 float rjesenje2(float A, float B, float C);
 char ieee754_jednostruko(float rbroj, char*);
