@@ -6,14 +6,16 @@
 #include "Header.h"
 
 int programerski(void) {
-	int zb = 0, cf = 0, dekad1;
-	int cnt = 0;
-	int okz = 0;
+	static int zb = 0, cf = 0, dekad1;
+	static int cnt = 0;
+	static int okz = 0;
 	int oktar[6];
 	int bin1[16];
+	int test;
 	int a, b, c, izbornik, rez, pos = 1, dec, bin = 0, okt = 0, hex = 0, decc = 0, i = 0, rem, len;
 	int* niz_brojeva = NULL;
 	int min;
+	char m, n,o;
 	long long binn, hexi[17];
 	//long int binar,j=1,remi,hexa=0;
 	float rezultat, pi = 3.14, rad;
@@ -74,7 +76,7 @@ int programerski(void) {
 
 	case 5:
 		do {
-			printf("Unesite dekadski broj koji želite pretvoriti u binarni:");//pretvaranje dekadskog broja u binarni
+			printf("Unesite dekadski broj koji želite pretvoriti u binarni (pozitivni i negativni):");//pretvaranje dekadskog broja u binarni
 			scanf("%d", &dec);
 
 		} while (dec < (-32516) || dec>32516); //granice unošenja
@@ -87,13 +89,14 @@ int programerski(void) {
 			printf("%d", point[i]);
 		}
 		printf("\n");
-		delete[] point;  //oslobaðamo mameoriju
+		//delete[] point;  
+		free(point);      //oslobaðamo memoriju
 		programerski();
 		break;
 
 	case 6:
 		do {
-			printf("Unesite dekadski broj:");  //pretvaranje dekadskog broja u oktalni s predznakom
+			printf("Unesite dekadski broj (pozitivan ili negativan):");  //pretvaranje dekadskog broja u oktalni s predznakom
 			scanf("%d", &dec);
 		} while (dec < (-32516) || dec>32516);
 		printf("\n");  //najprije dekadski pretvorimo u binarni
@@ -130,7 +133,7 @@ int programerski(void) {
 
 	case 7:
 		do {
-			printf("Unesite dekadski broj:");  //pretvaranje dekadskog broja u heksadekadski s predznakom
+			printf("Unesite dekadski broj pozitivan ili negativan:");  //pretvaranje dekadskog broja u heksadekadski s predznakom
 			scanf("%d", &dec);
 		} while (dec < (-32516) || dec>32516);
 		printf("\n");  //najprije dekadski pretvorimo u binarni
@@ -140,7 +143,7 @@ int programerski(void) {
 		cnt = 0;
 		okz = 0;
 		for (int i = 0; i < 16; i++) {
-			if (((i % 4) != 0) || (i == 0)) {  //odvajamo po 3 binarne znamenke  od kojih pravimo jednu oktalnu
+			if (((i % 4) != 0) || (i == 0)) {  //odvajamo po 3 binarne znamenke od kojih pravimo jednu oktalnu
 				cf = pow(2, cnt);			//preskaèemo ako je i==0
 				zb = zb + (point[i] * cf);
 				cnt++;				//brojaè do 3
@@ -160,7 +163,7 @@ int programerski(void) {
 		if (zb > 9) zb = zb + 55;
 		else zb = zb + 48;
 		hexar[okz] = zb;  //na kraju spremimo ostatak;
-		printf("Heksa dekadsk broj je:");
+		printf("Heksadekadski broj je:");
 		for (int i = 3; i >= 0; i--) {
 			printf("%c", hexar[i]);
 		}
@@ -171,9 +174,13 @@ int programerski(void) {
 
 
 	case 8:
+		do {
 
-		printf("Unesite binarni broj do 16 znamenki:"); //pretvaranje binarnog u dekadski bez predznaka
-		scanf("%lld", &binn);
+
+			printf("Unesite binarni broj do 16 znamenki:"); //pretvaranje binarnog u dekadski bez predznaka
+			scanf("%lld", &binn);
+			test = provjera_01(binn);
+		}while((test != 1)||binn>1111111111111111 || binn < 0);
 		decc = bin_to_dec(binn);
 
 		printf("Bin u dek:%d\n", decc);
@@ -183,22 +190,30 @@ int programerski(void) {
 	case 9:
 		//int okt = 0;
 		i = 0, okt = 0;
+		do {
 
-		printf("Unesite binarni broj:"); //pretvaranje iz binarnog u oktalni bez predznaka
-		scanf("%lld", &binn);
+
+			printf("Unesite binarni broj do 16 znamenki:"); //pretvaranje binarnog u oktalni bez predznaka
+			scanf("%lld", &binn);
+			test = provjera_01(binn);
+		} while ((test != 1) || binn > 1111111111111111 || binn < 0);
 
 
 		okt = bin_to_oct(binn);
 
-		printf("Bin u okt:%d\n", okt);
+		printf("Binarni broj u oktalni: %d\n", okt);
 		programerski();
 		break;
 
 	case 10:
+		do {
 
 
-		printf("Unesite binarni broj:"); //pretvaranje iz binarnog u heksadekadski bez predznaka
-		scanf("%lld", &binn);
+			printf("Unesite  binarni broj do 16 znamenki:"); //pretvaranje iz binarnog u heksadekadski bez predznaka
+			scanf("%lld", &binn);
+			test = provjera_01(binn);
+		} while ((test != 1) || binn > 1111111111111111||binn<0);
+
 		hex = bin_to_hex(binn);
 
 		printf("Bin u hex:%1X\n", hex);
@@ -220,7 +235,7 @@ int programerski(void) {
 			for (int i = 0; i < duzina; i++) {
 				ptr[i] = hbroj[i];
 
-				test = hex_znam(ptr[i]);
+				test = hex_znam(ptr[i]);//provjeravamo je li dobar upis
 				if (test == -1) {
 					break;
 				}
@@ -255,10 +270,10 @@ int programerski(void) {
 		} while (test == -1);
 
 
-		dekadski = hex_to_dec(ptr, duzina);
+		dekadski = hex_to_dec(ptr, duzina);  //funkciji šaljemo pokazivaè na poèetaks stringa  i dužinu stringa koji predstavlja
+		//heksadekadski broj
 
-
-		bin = dec_to_bin(dekadski);
+		bin = dec_to_bin(dekadski); //funkcija vraæa binarni broj
 		printf("Binarna vrijednost broja %s iznosi %d\n", hbroj, bin);
 		programerski();
 		break;
@@ -282,14 +297,14 @@ int programerski(void) {
 				}
 			}
 
-		} while (test == -1);
+		} while (test == -1);//provjera valjanosti upisa
 
 
-		dekadski = hex_to_dec(ptr, duzina);
+		dekadski = hex_to_dec(ptr, duzina);  //funkciji šaljemo pokazivaè na string koji predstavlja heksadekaski broj i 
+		//dužinu stringa funkcija vraæa dekadski broj
 
-
-		okt = dec_to_oct(dekadski);
-		printf("Oktalna vrijednost broja %s iznosi %d\n", hbroj, okt);
+		okt = dec_to_oct(dekadski);  //dekadski pretvaramo u oktalni
+		printf("Oktalna vrijednost broja %s(hex) iznosi %d\n", hbroj, okt);
 		programerski();
 		break;
 
@@ -307,10 +322,10 @@ int programerski(void) {
 					z = 0;
 				}
 
-			} while (z > 0);
+			} while (z > 0);//provjera valjanosti upisa.
 		} while (znam > 7);
 		od = oct_to_dec(n);
-		printf("Dekadska vrijednost broja %d iznosi %d\n", n, od);
+		printf("dekadska vrijednost broja %d (oktalno)  iznosi %d\n", n, od);
 		programerski();
 		break;
 
@@ -326,17 +341,16 @@ int programerski(void) {
 					z = 0;
 				}
 
-			} while (z > 0);
+			} while (z > 0);  //provjera valjanosti upisa
 		} while (znam > 7);
-		od = oct_to_dec(n);
-		bin = dec_to_bin(od);
-		printf("Binarna vrijednost broja %d iznosi %d\n", n, bin);
+		od = oct_to_dec(n);   //pretvaramo oktalni u dekadski
+		bin = dec_to_bin(od); //pretvaramo dekadski u binarni
+		printf("Binarna vrijednost broja %d (oktalno) iznosi %d\n", n, bin);
 		programerski();
 		break;
 
-	case 16:
-		/*int n, k, od;
-		int z, znam;*/
+	case 16:  //pretvaranje oktalnog broja u heksadekadski
+		
 		do {
 			printf("Unesite oktalni broj:");
 			scanf("%d", &n);
@@ -348,118 +362,99 @@ int programerski(void) {
 					z = 0;
 				}
 
-			} while (z > 0);
-		} while (znam > 7);
-		od = oct_to_dec(n);
-
-		//printf("Heksadekadska vrijednost broja %d iznosi\n", n);
-		dec_to_hex(od);
+			} while (z > 0);//provjera valjanosti upisa
+		} while (znam > 7||n>65000);
+		od = oct_to_dec(n);  //pretvaramo oktalni u dekadski
+		dec_to_hex(od); //pretvaramo dekadski u heksadekadski
 		printf("\n");
 
 		programerski();
 		break;
 
 	case 17:  //operacija logièko "i" (and)
-
+		do {
 		printf("Unesite prvi broj - dekadski:");
 		scanf("%d", &a);
 
-
-
-
 		printf("Unesite drugi broj dekadski:");
 		scanf("%d", &b);
+		} while (a < 0 || b < 0 || a>255 || b>255); //provjera valjanosti unosa
 
 
 		c = a & b;
 
-		printf("Vrijednost:%d\n\n", c);
+		printf("Vrijednost %d & %d iznosi:%d\n\n",a,b, c);
 
 		programerski();
 		break;
 
 	case 18:  //logièko "ili " (|)
-
+		do {
 		printf("Unesite prvi broj:");
 		scanf("%d", &a);
-
-
-
-
 		printf("Unesite drugi broj:");
 		scanf("%d", &b);
-
-
+		} while (a < 0 || b < 0 || a>255 || a>255); //provjera valjanosti unosa
 		c = a | b;
 
-		printf("Vrijednost:%d\n\n", c);
+		printf("Vrijednost %d | %d iznosi:%d\n\n", a, b, c);
 
 		programerski();
 		break;
 
 	case 19:  //logièko "ne"
-
-		printf("Unesite dekadski broj:");
-		scanf("%d", &a);
-
-		c = ~a;
-
-		printf("Vrijednost:%d\n\n", c);
+		do {
+			printf("Unesite dekadski broj za koji zelite izvrsiti logicko NE:");
+			scanf("%d", &a);
+		} while (a < 0 || a>255); //provjera valjanosti unosa
+			c = ~a;
+		
+		printf("Logicko NE broja %d iznosi %d\n\n",a, c);
 
 		programerski();
 		break;
 
 	case 20://logièko NI
-
-		printf("Unesite prvi broj - dekadski:");
-		scanf("%d", &a);
-
-
-
-
-		printf("Unesite drugi broj - dekadski:");
-		scanf("%d", &b);
-
+		do {
+			printf("Unesite prvi broj - dekadski:");
+			scanf("%d", &a);
+			printf("Unesite drugi broj - dekadski:");
+			scanf("%d", &b);
+		} while (a < 0 || b < 0 || a>255 || b>255); //provjera valjanosti unosa
 
 		c = ~(a & b);
 
-		printf("Vrijednost:%d\n\n", c);
+		printf("NI vrijednost brojeva %d i %d iznosi: %d\n\n",a,b, c);
 
 		programerski();
 		break;
 
 	case 21: //logièko "nili"
-
+		do {
 		printf("Unesite prvi broj - dekadski:");
 		scanf("%d", &a);
-
-
-
-
 		printf("Unesite drugi broj dekadski:");
 		scanf("%d", &b);
-
+		} while (a < 0 || b < 0 || a>255 || b>255); //provjera valjanosti unosa
 
 		c = ~(a | b);
 
-		printf("Vrijednost:%d\n\n", c);
+		printf("Vrijednost nili brojeva %d i %d iznosi: %d\n\n",a,b, c);
 
 		programerski();
 		break;
 
 	case 22: //logièko iskljuèivo ili (xor)
-
+		do {
 		printf("Unesite prvi broj:");
 		scanf("%d", &a);
-
-
 		printf("Unesite drugi broj:");
 		scanf("%d", &b);
-
+		} while (a < 0 || b < 0 || a>255 || b>255); //provjera valjanosti unosa
 
 		c = a ^ b;
 
-		printf("Vrijednost:%d\n\n", c);
+		printf("Vrijednost iskljucivo ili brojeva %d i %d iznosi: %d\n\n", a,b,c);
 
 		programerski();
 		break;

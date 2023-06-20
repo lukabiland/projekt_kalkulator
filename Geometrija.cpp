@@ -51,7 +51,7 @@ void geometrija(void) {
 		geometrija();
 		break;
 
-	case 3: //trokut
+	case 3: //kvadar
 		printf("Unesite stranicu:");
 		scanf("%f", &a);
 		printf("Unesite stranicu:");

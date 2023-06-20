@@ -48,8 +48,8 @@ void standardni(void) {
 		standardni();
 		break;
 	case 5:
-		printf("Unesite postotak i broj:");
-		scanf("%f", &a);
+		printf("Unesite postotak i broj:");  //unosimo postotak i broj od kojeg želimo izraèunati taj postotak, na primjer
+		scanf("%f", &a);          //20 150 funkcija æe vratiti d
 		scanf("%f", &b);
 		rezultat = postotak(a, b);
 		printf("%f posto od %f=%f\n", a, b, rezultat);

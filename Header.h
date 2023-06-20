@@ -9,6 +9,7 @@ typedef struct tocka {
 	float x;
 	float y;
 }TOCKA;
+int provjera_01(long long);
 int bin_to_decimal(int*);
 long long dec_to_bin_dv(long long dec);
 void mantisa_dv(float rbroj, char* ie2);
@@ -23,8 +24,8 @@ float postotak(float a, float b);
 float drugi_korjen(float a);
 void znanstveni(void);
 float apsolutni(float a);
-float mod(int a, int b);
-int faktorijel(int n);
+int mod(int a, int b);
+long long faktorijel(int n);
 float x_na_y(int x, int y);
 int programerski(void);
 

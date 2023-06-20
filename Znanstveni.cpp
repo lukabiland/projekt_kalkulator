@@ -7,7 +7,7 @@
 void znanstveni(void) {
 	int izbornik, n;
 	float a, b, rezultat, pi = 3.14, rad, a1, q;
-
+	int ostatak, rezultat_ost,aa,bb;
 
 	printf("Odaberite operaciju:\n");
 	printf("1 Zbrajanje\n2 Oduzimanje\n3 Mnozenje\n4 Dijeljenje\n5 Apsolutna_vrijednost\n6 Mod\n7 Faktorijel\n8 1/x\n9 Na_kvadrat\n");
@@ -53,30 +53,31 @@ void znanstveni(void) {
 	case 5:
 		printf("Unesite broj za koji zelite apsolutnu vrijednost:");//apsolutna vrijednost
 		scanf("%f", &a);
-		//scanf("%f", &b);
 		rezultat = apsolutni(a);
 		printf("%f=%f\n", a, rezultat);
 		znanstveni();
 		break;
 
 	case 6:
-		printf("Unesite dva broja koja zelite podijeliti s ostatkom:"); //dijeljenje s ostatkom
-		scanf("%f", &a);
-		scanf("%f", &b);
-		rezultat = mod(a, b);
-		printf("%f mod %f=%f\n", a, b, rezultat);
+		printf("Unesite dva broja koja zelite podijeliti i dobiti rezultat i ostatak dijeljenja:"); //dijeljenje s ostatkom
+		scanf("%d", &aa);
+		scanf("%d", &bb);
+	    ostatak = mod(aa, bb);
+		rezultat_ost = aa / bb;
+		printf("%d mod %d=%d i ostatak je %d \n", aa, bb, rezultat_ost,ostatak);
 		znanstveni();
 		break;
 
 	case 7:
-		int n, rez;
+		long long  rez;
+		int n;
 		do {
 			printf("Unesite broj faktorijela:");  //raèunanje faktorijela
 			scanf("%d", &n);
-		} while (n <= 0 && n > 15);
+		} while (n <= 0 || n > 11);
 
 		rez = faktorijel(n);
-		printf("Faktorijel broja %d je %d.\n", n, rez);
+		printf("Faktorijel broja %d je %ld.\n", n, rez);
 		znanstveni();
 		break;
 	case 8:
@@ -109,7 +110,7 @@ void znanstveni(void) {
 		break;
 
 	case 11:
-		printf("Unesite broj koja zelite korjenovati:"); //korjenovanje
+		printf("Unesite broj koja zelite korjenovati:"); //korjenovanje - drugi korjen
 		scanf("%f", &a);
 
 		rezultat = drugi_korjen(a);
@@ -139,7 +140,7 @@ void znanstveni(void) {
 		printf("Unesite kut u stupnjevima:"); //raèunanje sinusa
 		scanf("%f", &a);
 
-		rad = a * (pi / 180);
+		rad = a * (pi / 180);  //pretvaranje stupnjeva u radijane
 
 		rezultat = sin(rad);
 		printf("Sinus od kuta %f je %f\n", a, rezultat);
@@ -147,10 +148,10 @@ void znanstveni(void) {
 		break;
 
 	case 15:
-		printf("Unesite kut u stupnjevima:");//raèunanje cosinusa
+		printf("Unesite kut u stupnjevima:");//raèunanje kosinusa
 		scanf("%f", &a);
 
-		rad = a * (pi / 180);
+		rad = a * (pi / 180);	//pretvaranje stupnjeva u radijane
 
 		rezultat = cos(rad);
 		printf("Kosinus od kuta %f je %f\n", a, rezultat);
@@ -161,7 +162,7 @@ void znanstveni(void) {
 		printf("Unesite kut u stupnjevima:"); //raèunanje tangensa
 		scanf("%f", &a);
 
-		rad = a * (pi / 180);
+		rad = a * (pi / 180);	//pretvaranje stupnjeva u radijane
 
 		rezultat = tan(rad);
 		printf("Tangens od kuta %f je %f\n", a, rezultat);
@@ -172,7 +173,7 @@ void znanstveni(void) {
 		printf("Unesite kut u stupnjevima:");
 		scanf("%f", &a); //raèunanje cotangensa (1/tangens)
 
-		rad = a * (pi / 180);
+		rad = a * (pi / 180);	//pretvaranje stupnjeva u radijane
 
 		rezultat = 1 / (tan(rad));
 		printf("Kotangens od kuta %f je %f\n", a, rezultat);
@@ -181,11 +182,11 @@ void znanstveni(void) {
 
 	case 18:
 		do {
-			printf("Unesite sinus kuta (od -1 do 1:)"); //raèunanje kuta iz sinusa
+			printf("Unesite sinus kuta (od -1 do 1:)"); //raèunanje kuta iz sinusa. Vrijednost sinusa mora biti izmeðu 1 i -1
 			scanf("%f", &a);
 		} while ((a < -1) || (a > 1));
 
-		rezultat = asin(a) * 180 / pi;
+		rezultat = asin(a) * 180 / pi; //pretvaranje iz radijana u stupnjeve
 
 		printf("Rezultat je %f\n", rezultat);
 		znanstveni();
@@ -193,10 +194,10 @@ void znanstveni(void) {
 
 	case 19:
 		do {
-			printf("Unesite cosinus kuta (od -1 do 1:)");//raèunanje kuta iz cosinusa
+			printf("Unesite cosinus kuta (od -1 do 1:)");//raèunanje kuta iz cosinusa. Vrijednost sinusa mora biti izmeðu 1 i -1
 			scanf("%f", &a);
 		} while ((a < -1) || (a > 1));
-		rezultat = acos(a) * 180 / pi;
+		rezultat = acos(a) * 180 / pi; //pretvaranje iz radijana u stupnjeve
 		printf("Rezultat je %f\n", rezultat);
 		znanstveni();
 		break;
@@ -204,7 +205,7 @@ void znanstveni(void) {
 	case 20:
 		printf("Unesite tangens kuta:");//raèunanje kuta iz vrijednosti tangensa
 		scanf("%f", &a);
-		rezultat = atan(a) * 180 / pi;
+		rezultat = atan(a) * 180 / pi; //pretvaranje iz radijana u stupnjeve
 		printf("Vrijednost kuta je: %f\n", rezultat);
 		znanstveni();
 		break;
@@ -212,7 +213,7 @@ void znanstveni(void) {
 	case 21:
 		printf("Unesite cotangens kuta:");//raèunanje kuta iz vrijednosti cotangensa
 		scanf("%f", &a);
-		rezultat = (1 / atan(a)) * 180 / pi;
+		rezultat = (1 / atan(a)) * 180 / pi; //pretvaranje iz radijana u stupnjeve
 		printf("vrijednost kuta je: %f\n", rezultat);
 		znanstveni();
 		break;

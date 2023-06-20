@@ -6,7 +6,7 @@
 #include "Header.h"
 #define M_PI 3.14159265359
 
-float zbrajanje(float a, float b) {
+float zbrajanje(float a, float b) { //Zbrajanje brojeva, koje se još nalazi u tekstualnoj datoteci
 	FILE* fp = NULL;
 	fp = fopen("zbroj.txt", "w");
 
@@ -24,7 +24,7 @@ float zbrajanje(float a, float b) {
 
 	return zbr;
 }
-float oduzimanje(float a, float b) {
+float oduzimanje(float a, float b) {  //Oduzimanje brojeva, koje se još nalazi u tekstualnoj datoteci
 
 	FILE* fp = NULL;
 	fp = fopen("oduzimanje.txt", "w");
@@ -42,7 +42,7 @@ float oduzimanje(float a, float b) {
 	return od;
 }
 
-float mnozenje(float a, float b) {
+float mnozenje(float a, float b) {   //Množenje brojeva, koje se još nalazi u tekstualnoj datoteci
 	FILE* fp = NULL;
 	fp = fopen("mnozenje.txt", "w");
 
@@ -59,7 +59,7 @@ float mnozenje(float a, float b) {
 	return mn;
 }
 
-float dijeljenje(float a, float b) {
+float dijeljenje(float a, float b) {   //Dijeljenje brojeva, koje se još nalazi u tekstualnoj datoteci
 	FILE* fp = NULL;
 	fp = fopen("dijeljenje.txt", "w");
 
@@ -111,31 +111,30 @@ void bubbleSort(int polje[], const int n) {
 	}*/
 
 
-float postotak(float a, float b) {
+float postotak(float a, float b) {  //na primjer 20 150 znaèi 20% od 150   rezultat=20*(1/100)*150 rezultat=30   1/100=0.01
 	float posto = a * 0.01 * b;
 
 	return posto;
 }
-float drugi_korjen(float a) {
+float drugi_korjen(float a) {  //raèunanje drugog korjena
 	float kor = sqrt(a);
 
 	return kor;
 }
 
-float apsolutni(float a) {
+float apsolutni(float a) { //ako je broj manji od nule množimo ga s -1
 	if (a < 0) {
 		a = a * (-1);
 	}
 	return a;
 }
 
-float mod(int a, int b) {
-	float mo = a % b;
+int mod(int a, int b) { //dijeljenje s ostatkom i vraæanje ostatka
+	int mo = a % b;
 	return mo;
 }
 
-int faktorijel(int n) {
-	//printf("Poziv za n = %d, adresa varijable &n = %p.\n", n, &n);
+long long faktorijel(int n) {
 	if (n > 1) {
 		return n * faktorijel(n - 1);
 	}
@@ -162,21 +161,21 @@ int dec_to_bin(long long dec) { //Dekadski u binarni
 
 int* dec_to_bin_ar(int dec) { //Dekadski u binarni
 	int n = 0, i = 0;
-	int* a = new int[16];
+	int* a = new int[16]; //postavljamo pokazivaè na niz od 16 podataka tipa int
 	if (dec < 0)
 	{
-		dec = dec * (-1);
+		dec = dec * (-1);   //ovo je postupak kada je dekadski broj negativan
 		for (i = 0; i < 16; i++)
 		{
-			int s1 = dec % 2;
-			if (s1 == 0) a[i] = 1;
+			int s1 = dec % 2;  
+			if (s1 == 0) a[i] = 1; //radimo prvi komplement (nule u jedinice, a jedinice u nule)
 			else a[i] = 0;
 			dec = dec / 2;
 
 		}
 		for (i = 0; i < 16; i++)
 		{
-			if (a[i] == 1) a[i] = 0;
+			if (a[i] == 1) a[i] = 0;  //dodajemo 1 i dobivamo drugi komplement
 			else {
 				a[i] = 1;
 				break;
@@ -185,7 +184,7 @@ int* dec_to_bin_ar(int dec) { //Dekadski u binarni
 
 	}
 	else {
-		for (i = 0; i < 16; i++)
+		for (i = 0; i < 16; i++)  //ako je dekadski broj pozitivan
 		{
 			int s1 = dec % 2;
 			if (s1 == 0) a[i] = 0;
@@ -233,6 +232,20 @@ void dec_to_hex(long long dec) {
 	}
 }
 
+int provjera_01(long long br) {  //provjeravamo je li dekadski broj ispravan, odnosno ima li u broja
+	for (int i = 0; i < 16; i++) {//znamenki veæih od 1
+		int ost = br % 10;
+		if (ost > 1) {
+			return 2;
+			break;
+		}
+		else {
+			br = br / 10;
+		}
+	}
+	return 1;
+
+}
 int bin_to_dec(long long binn) { //Binarni u dekadski
 	int i = 0, decc = 0, rem;
 
@@ -245,7 +258,7 @@ int bin_to_dec(long long binn) { //Binarni u dekadski
 	} while (binn != 0);
 	return decc;
 }
-
+/*
 int bin_to_decimal(int* binn) { //Binarni u dekadski
 	int i = 0, decc = 0, rem;
 	if (binn[0] == 1) {
@@ -269,19 +282,19 @@ int bin_to_decimal(int* binn) { //Binarni u dekadski
 	}
 	//if (binn[15] == 1) zbr = zbr * (-1);
 	return zbr;
-}
+}*/
 
 int bin_to_oct(long long binn) { //Binarni u oktalni
 	int i = 0, decc = 0, okt = 0;
 
 	do {
-		decc += (binn % 10) * pow(2, i);
+		decc += (binn % 10) * pow(2, i);  //najprije pretvaramo binarni u dekadski
 		i++;
 		binn /= 10;
 	} while (binn != 0);
 	i = 1;
 	do {
-		okt += (decc % 8) * i;
+		okt += (decc % 8) * i; //pa dekadski u oktalni
 		decc /= 8;
 		i *= 10;
 	} while (decc != 0);
@@ -301,16 +314,16 @@ int bin_to_hex(long long binn) { //Binarni u heksadekadski
 }
 
 int hex_znam(char znam) {
-	if ((znam > 47) && (znam < 58)) {
+	if ((znam > 47) && (znam < 58)) {		//Brojevi od 0 do 9
 		return znam - 48;
 	}
-	else if ((znam > 64) && (znam < 71)) {
+	else if ((znam > 64) && (znam < 71)) {	//Velika slova od A do F	
 		return znam - 55;
 	}
-	else if ((znam > 96) && (znam < 103)) {
+	else if ((znam > 96) && (znam < 103)) { //Mala slova od a do f
 		return znam - 87;
 	}
-	else return -1;
+	else return -1;  //ukoliko nije dobar upis vraæamo -1 što znaèi greška u upisu
 }
 long long hex_to_dec(char* hexbroj, int duzina) { //Heksadekadski u dekadski
 	int  znamenka;
@@ -323,13 +336,13 @@ long long hex_to_dec(char* hexbroj, int duzina) { //Heksadekadski u dekadski
 		}
 		dekadski = dekadski + znamenka * pow(16, (duzina - i - 1));
 	}
-	return dekadski;
+	return dekadski;  //vraæamo dekadsku vrijednost broja
 }
 
 int oct_to_dec(int n) {  //Oktalni u dekadski
 	int p = 0, dec = 0, r;
 
-	do {
+	do {  
 		r = n % 10;
 		n = n / 10;
 		dec = dec + r * pow(8, p);
@@ -423,22 +436,22 @@ float prostorna_dijagonala_kocke(float a) {
 
 float trokut(float a, float b, float c) {
 	float x;
-	if ((a + b < c || a + c < b || b + c < a)) {
+	if ((a + b < c || a + c < b || b + c < a)) { //Ovdje nema trokuta zbog nedovoljnog zbroja dviju stranica koje su manje od trece stranice
 		x = 0;
 	}
-	else if (a == b && a != c) {
+	else if (a == b && a != c) {  //Jednakokracan trokut, c nije jednako s a i b
 		x = 2;
 	}
-	else if (a != c && a != b && c != b) {
+	else if (a != c && a != b && c != b) {  //Raznostranican trokut
 		x = 3;
 	}
-	else if (b == c && a != c) {
+	else if (b == c && a != c) {   //Jednakokracan trokut, a nije jednako s b i c
 		x = 2;
 	}
-	else if (a == c && b != c) {
+	else if (a == c && b != c) {   //Jednakokracan trokut, b nije jednako s a i c
 		x = 2;
 	}
-	else if (a == b && a == c) {
+	else if (a == b && a == c) {   //Jednakostranican trokut
 		x = 1;
 	}
 	return x;
@@ -446,19 +459,19 @@ float trokut(float a, float b, float c) {
 
 float opseg_trokuta(float a, float b, float c) {
 	float o, p;
-	if (a == b && a != c) {
+	if (a == b && a != c) {      //Opseg trokuta za jednakokracan trokut
 		o = (2 * a) + b;
 	}
-	else if (a != c && a != b && c != b) {
+	else if (a != c && a != b && c != b) {   //Opseg trokuta za raznostranican trokut
 		o = a + b + c;
 	}
-	else if (b == c && a != c) {
+	else if (b == c && a != c) {	//Opseg trokuta za jednakokracan trokut
 		o = (2 * a) + b;
 	}
-	else if (a == c && b != c) {
+	else if (a == c && b != c) {	//Opseg trokuta za jednakokracan trokut
 		o = (2 * a) + b;
 	}
-	else if (a == b && a == c) {
+	else if (a == b && a == c) {    //Opseg trokuta za jednakostranican trokut
 		o = 3 * a;
 	}
 	return o;
@@ -467,19 +480,19 @@ float opseg_trokuta(float a, float b, float c) {
 float povrsina_trokuta(float a, float b, float c, float s) {
 	float o, p;
 	//s =(1/2.)*(a + b + c);
-	if (a == b && a != c) {
+	if (a == b && a != c) {			//Povrsina trokuta za jednakokracan trokut
 		p = sqrt(s * (s - a) * (s - b) * (s - c));
 	}
-	else if (a != c && a != b && c != b) {
+	else if (a != c && a != b && c != b) {		//Povrsina trokuta za raznostranican trokut
 		p = sqrt(s * (s - a) * (s - b) * (s - c));
 	}
-	else if (b == c && a != c) {
+	else if (b == c && a != c) {	//Povrsina trokuta za jednakokracan trokut
 		p = sqrt(s * (s - a) * (s - b) * (s - c));
 	}
-	else if (a == c && b != c) {
+	else if (a == c && b != c) {	//Povrsina trokuta za jednakokracan trokut
 		p = sqrt(s * (s - a) * (s - b) * (s - c));
 	}
-	else if (a == b && a == c) {
+	else if (a == b && a == c) {	//Povrsina trokuta za jednakostranican trokut
 		p = sqrt(s * (s - a) * (s - b) * (s - c));
 	}
 	return p;
@@ -738,9 +751,7 @@ void mantisa(float rbroj, char* ie1) {//racunanje mantise
 void aniz(float a1, int n, float d) {  //Aritmeticki niz
 	float clan;
 	FILE* fp;
-
-
-	fp = fopen("aritmeticki.txt", "w");
+	fp = fopen("aritmeticki.txt", "w");  //stvaramo datoteku "aritemtièki.txt" u  koju æemo spremiti niz
 	if (fp == NULL) {
 		perror("kreiranje datoteke aritmeticki.txt");
 		exit(EXIT_FAILURE);
@@ -749,7 +760,7 @@ void aniz(float a1, int n, float d) {  //Aritmeticki niz
 	printf("1. clan=%f\n", a1);
 	fprintf(fp, "1. clan=%f\n", a1);
 	for (int i = 1; i < n; i++) {
-		clan = a1 + i * d;
+		clan = a1 + i * d;           //raèunanje èlanova niza
 		printf("%d. clan=%f\n", i + 1, clan);
 		fprintf(fp, "%d. clan=%f\n", i + 1, clan);
 
@@ -770,18 +781,15 @@ void gniz(float a1, int n, float q) {  //Geometrijski niz
 
 	}
 
-	//printf("1. clan=%f\n", a1);
-	//fprintf(fp, "1. clan=%f\n", a1);
-
 	for (int i = 1; i <= n; i++) {
-		clan = a1 * pow(q, (i - 1));
+		clan = a1 * pow(q, (i - 1));  //raèunanje èlanova geometrijskog niza
 		printf("%d. clan=%f\n", i, clan);
 		fprintf(fp, "%d. clan=%f\n", i, clan);
 	}
 	fclose(fp);
 }
 
-void zamjena(int* veci, int* manji) {
+void zamjena(int* veci, int* manji) {  //Sortiranje brojeva od najmanjeg do najveceg
 	int temp = 0;
 	temp = *manji;
 	*manji = *veci;
